@@ -2,6 +2,10 @@
 class EndPoints {
 
   static const String baseUrl = 'http://api.mahmoudtaha.com/api/';
-
+  static const String login = 'auth/login';
+  static const String register = 'auth/register';
+  static const String profileInfo = 'auth/profile-info';
+  static const String updateInfo = 'auth/update-info';
+  static const String passChange = 'auth/pass-change';
 
 }

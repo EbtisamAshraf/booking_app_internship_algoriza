@@ -1,4 +1,7 @@
 import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
+import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/login_screen.dart';
+import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/register_screen.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/main_screen.dart';
 import 'package:booking_app_internship_algoriza/main.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +9,8 @@ import 'package:flutter/material.dart';
 class Routes {
 
   static const String init = '/';
+  static const String loginScreenRoute = "/login";
+  static const String registerScreenRoute = "/register";
 
 }
 
@@ -14,8 +19,13 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.init:
         return MaterialPageRoute(
-          builder: (_) =>  const MyHomePage(title: 'title',),
+          builder: (_) =>  const MainScreen(),
         );
+      case Routes.loginScreenRoute:
+        return MaterialPageRoute(builder: (_) =>  LoginScreen());
+
+      case Routes.registerScreenRoute:
+        return MaterialPageRoute(builder: (_) =>   RegisterScreen());
 
       default:
         return unDefinedRoute();

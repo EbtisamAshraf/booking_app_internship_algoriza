@@ -13,5 +13,10 @@ ThemeData appTheme() {
           titleTextStyle: TextStyle(color: Colors.black , fontSize: 18)),
       textTheme: const TextTheme(
           bodyLarge: TextStyle(
-              color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)));
+              color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+      displaySmall:  TextStyle(fontSize: 16),
+      displayMedium:  TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),
+      headlineLarge:   TextStyle(fontSize: 30) ),
+  );
+
 }

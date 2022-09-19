@@ -34,9 +34,9 @@ class DioConsumer implements ApiConsumer {
     }
   }
   @override
-  Future get(String path, {Map<String, dynamic>? queryParameters}) async {
+  Future get(String path, {Map<String, dynamic>? queryParameters, Map<String, dynamic>? header}) async {
     try {
-      final response = await dio.get(path, queryParameters: queryParameters);
+      final response = await dio.get(path, queryParameters: queryParameters,options:Options(contentType: 'application/json' ,headers: header));
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);
@@ -46,10 +46,10 @@ class DioConsumer implements ApiConsumer {
   @override
   Future post(String path,
       {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters}) async {
+      Map<String, dynamic>? queryParameters, Map<String, dynamic>? header}) async {
     try {
       final response =
-          await dio.post(path, data: body, queryParameters: queryParameters);
+          await dio.post(path, data: body, queryParameters: queryParameters,options:Options(contentType: 'application/json' ,headers: header));
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);
@@ -59,10 +59,10 @@ class DioConsumer implements ApiConsumer {
   @override
   Future put(String path,
       {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters}) async {
+      Map<String, dynamic>? queryParameters, Map<String, dynamic>? header}) async {
     try {
       final response =
-          await dio.put(path, data: body, queryParameters: queryParameters);
+          await dio.put(path, data: body, queryParameters: queryParameters,options:Options(contentType: 'application/json' ,headers: header));
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);
