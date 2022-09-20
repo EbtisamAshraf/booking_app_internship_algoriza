@@ -8,7 +8,6 @@ import '../../../../core/widgets/default_button.dart';
 
 class HomeScreen extends StatelessWidget {
   var pageController = PageController();
-  var top = 0.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
