@@ -9,6 +9,12 @@ import 'package:booking_app_internship_algoriza/features/authentication/domain/u
 import 'package:booking_app_internship_algoriza/features/authentication/domain/use_cases/register_user.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/cubit/login_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/cubit/register_cubit.dart';
+import 'package:booking_app_internship_algoriza/features/profile/data/data_sources/profile_remote_data_source.dart';
+import 'package:booking_app_internship_algoriza/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:booking_app_internship_algoriza/features/profile/domain/repositories/profile_repository.dart';
+import 'package:booking_app_internship_algoriza/features/profile/domain/use_cases/get_profile_info.dart';
+import 'package:booking_app_internship_algoriza/features/profile/domain/use_cases/update_info.dart';
+import 'package:booking_app_internship_algoriza/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -22,7 +28,24 @@ import 'features/hotels/domain/use_cases/explore_use_cases.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  ///feature
+  ///feature profile
+  //bloc
+  sl.registerFactory(() => ProfileCubit( getProfileInfoUseCase: sl() , updateInfoUseCase: sl()));
+
+  // use case
+  sl.registerLazySingleton(() => GetProfileInfoUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateInfoUseCase(sl()));
+  //  //Repository
+
+  sl.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl(
+      networkInfo: sl(),
+      profileRemoteDataSource: sl()));
+
+  //  // data source
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+          () => ProfileRemoteDataSourceImpl(apiConsumer: sl()));
+
+  ///feature auth
   //bloc
   sl.registerFactory(() => LoginCubit(loginUserUseCase:sl()  ));
   sl.registerFactory(() => RegisterCubit(registerUserUseCase:sl()  ));

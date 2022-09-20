@@ -62,15 +62,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final RegisterModel registerResponse =
         RegisterModel.fromJson(response);
     debugPrint('data = ${registerResponse.data}', wrapWidth: 1024);
+    AppStrings.token = registerResponse.data.apiToken!;
+    di.sl<SharedPreferences>().setString("token", registerResponse.data.apiToken!);
     return registerResponse;
   }
-
-
-
-
-
-
-
 
 
 }

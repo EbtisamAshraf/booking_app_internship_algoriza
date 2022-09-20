@@ -1,4 +1,5 @@
 
+import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/utils/constants.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_button.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_text_form_field.dart';
@@ -29,6 +30,7 @@ class RegisterScreen extends StatelessWidget {
             Constants.showToast(msg: state.error,clr: Colors.redAccent);
           }else if (state is RegisterLoadedState){
             Constants.showToast(clr: Colors.green,msg: state.registerModel.status.title!.ar == null? state.registerModel.status.title.toString() :state.registerModel.status.title!.ar.toString());
+            Navigator.pushNamedAndRemoveUntil(context, Routes.init, (route) => false);
           }
         },
         builder: (context, state) {

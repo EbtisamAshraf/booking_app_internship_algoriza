@@ -1,4 +1,5 @@
 import 'package:booking_app_internship_algoriza/core/utils/app_colors.dart';
+import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/profile_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> screens = [
 HomeScreen(),
     Container(),
-    Container(),
+    ProfileScreen(),
   ];
 
   @override
@@ -58,18 +59,18 @@ HomeScreen(),
             items: const [
               BottomNavigationBarItem(
                 icon:
-                Icon(Icons.saved_search),
-                label: ''
+                Icon(Icons.search),
+                label: 'Explore'
               ),
               BottomNavigationBarItem(
                 icon:
-                Icon(Icons.home),
-                  label: ''
+                Icon(Icons.favorite_border),
+                  label: 'booking'
               ),
               BottomNavigationBarItem(
                 icon:
-                Icon(Icons.person),
-                  label: ''
+                Icon(Icons.person_outline),
+                  label: 'Profile'
               ),
 
             ],
