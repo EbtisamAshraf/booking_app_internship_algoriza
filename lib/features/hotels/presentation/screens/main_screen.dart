@@ -1,5 +1,6 @@
 import 'package:booking_app_internship_algoriza/core/utils/app_colors.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/profile_screen.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   int currentIndexScreen = 0;
 
   List<Widget> screens = [
-    Container(),
+   const ExploreScreen(),
     Container(),
     ProfileScreen(),
   ];
