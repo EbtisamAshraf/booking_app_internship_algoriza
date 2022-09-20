@@ -1,5 +1,4 @@
 
-
 import 'package:booking_app_internship_algoriza/core/error/exceptions.dart';
 import 'package:booking_app_internship_algoriza/core/error/failures.dart';
 import 'package:booking_app_internship_algoriza/core/network/network_info.dart';
@@ -10,7 +9,6 @@ import 'package:booking_app_internship_algoriza/features/authentication/domain/r
 import 'package:booking_app_internship_algoriza/features/authentication/domain/use_cases/login_user.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/domain/use_cases/register_user.dart';
 import 'package:dartz/dartz.dart';
-
 import 'package:flutter/material.dart';
 
 
@@ -59,7 +57,5 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(OfflineFailure());
     }
   }
-
-
 
 }

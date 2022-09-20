@@ -1,5 +1,6 @@
 import 'package:booking_app_internship_algoriza/core/api/api_consumer.dart';
 import 'package:booking_app_internship_algoriza/core/api/end_points.dart';
+import 'package:booking_app_internship_algoriza/core/error/exceptions.dart';
 import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/pass_change_Model.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
@@ -22,19 +23,49 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<PassChangeModel> changePassword({required ChangePasswordParam changePasswordParam}) async{
-    throw UnimplementedError();
+    final response = await apiConsumer.post(EndPoints.passChange,body: {
+      'password':changePasswordParam.password,
+      'password_confirmation': changePasswordParam.passwordConfirmation,
+      'email':changePasswordParam.email,
+    },header: {'token': AppStrings.token}).onError((error, stackTrace) {
+      debugPrint('error = $error');
+      throw ServerException;
+    });
+    debugPrint('response = $response');
+    final PassChangeModel passChangeModel =
+    PassChangeModel.fromJson(response);
+    debugPrint('data = ${passChangeModel.data}', wrapWidth: 1024);
+    return passChangeModel;
   }
 
   @override
   Future<ProfileInfoModel> getProfileInfo() async {
-    final response = await apiConsumer.get(EndPoints.profileInfo,header: {'token': AppStrings.token});
-    throw UnimplementedError();
+    final response = await apiConsumer.get(EndPoints.profileInfo,header: {'token': AppStrings.token}).onError((error, stackTrace) {
+      debugPrint('error = $error');
+      throw ServerException;
+    });
+    debugPrint('response = $response');
+    final ProfileInfoModel profileInfoModel =
+    ProfileInfoModel.fromJson(response);
+    debugPrint('data = ${profileInfoModel.data}', wrapWidth: 1024);
+    return profileInfoModel;
   }
 
   @override
   Future<UpdateInfoModel> updateInfo({required UpdateInfoParam updateInfoParam})  async{
-    // TODO: implement updateInfo
-    throw UnimplementedError();
+    final response = await apiConsumer.post(EndPoints.updateInfo,body: {
+      'name': updateInfoParam.name,
+      'email': updateInfoParam.email,
+      'image': updateInfoParam.image,
+    },header: {'token': AppStrings.token}).onError((error, stackTrace) {
+      debugPrint('error = $error');
+      throw ServerException;
+    });
+    debugPrint('response = $response');
+    final UpdateInfoModel updateInfoModel =
+    UpdateInfoModel.fromJson(response);
+    debugPrint('data = ${updateInfoModel.data}', wrapWidth: 1024);
+    return updateInfoModel;
   }
 }
 

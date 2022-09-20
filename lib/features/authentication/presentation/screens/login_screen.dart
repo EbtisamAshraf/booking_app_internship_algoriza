@@ -26,6 +26,7 @@ class LoginScreen extends StatelessWidget {
               Constants.showToast(msg: state.error,clr: Colors.redAccent);
             }else if (state is LoginLoadedState){
               Constants.showToast(clr: Colors.green,msg: state.loginModel.status.title!.ar == null? state.loginModel.status.title.toString() :state.loginModel.status.title!.ar.toString());
+              Navigator.pushNamedAndRemoveUntil(context, Routes.init, (route) => false);
             }
           },
           builder: (context, state) {

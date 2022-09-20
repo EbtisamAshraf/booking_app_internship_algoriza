@@ -6,17 +6,18 @@ import 'package:flutter/material.dart';
 ThemeData appTheme() {
   return ThemeData(
       primaryColor: AppColors.primaryColor,
+      scaffoldBackgroundColor: Colors.white,
       appBarTheme: const AppBarTheme(
+        iconTheme: IconThemeData(color: Colors.black),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           titleTextStyle: TextStyle(color: Colors.black , fontSize: 18)),
       textTheme: const TextTheme(
-          bodyLarge: TextStyle(
-              color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+      bodyLarge: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
       displaySmall:  TextStyle(fontSize: 16),
-      displayMedium:  TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),
-      headlineLarge:   TextStyle(fontSize: 30) ),
+      displayMedium: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),
+      headlineLarge:  TextStyle(fontSize: 30) ),
   );
 
 }
