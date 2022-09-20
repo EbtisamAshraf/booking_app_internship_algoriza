@@ -19,6 +19,10 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'features/hotels/data/data_sources/explore_remote_data_sources.dart';
+import 'features/hotels/data/repository/repo_impl.dart';
+import 'features/hotels/domain/repositories/hotels_repo.dart';
+import 'features/hotels/domain/use_cases/explore_use_cases.dart';
 
 
 final sl = GetIt.instance;
@@ -48,15 +52,23 @@ Future<void> init() async {
   // use case
   sl.registerLazySingleton(() => LoginUserUseCase(sl()));
   sl.registerLazySingleton(() => RegisterUserUseCase(sl()));
+  sl.registerLazySingleton(() => ExploreUseCase(sl()));
  //  //Repository
 
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
       networkInfo: sl(),
       authRemoteDataSource: sl()));
 
+  sl.registerLazySingleton<ExploreRepository>(() => ExploreRepositoryImpl(
+      networkInfo: sl(),
+      exploreRemoteDataSource: sl()));
+
  //  // data source
   sl.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(apiConsumer: sl()));
+
+  sl.registerLazySingleton<ExploreRemoteDataSource>(
+          () => ExploreRemoteDataSourceImpl(apiConsumer: sl()));
 
   // core
    sl.registerLazySingleton<NetworkInfo>(
