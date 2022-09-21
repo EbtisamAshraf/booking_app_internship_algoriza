@@ -1,8 +1,8 @@
+import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/utils/media_query_values.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
- import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/default_button.dart';
 
@@ -42,7 +42,6 @@ class HomeScreen extends StatelessWidget {
               ),
               expandedHeight: context.hight / 1.7,
               flexibleSpace: LayoutBuilder(
-
                 builder: (BuildContext context, BoxConstraints constraints) {
                   return Stack(
                     children: [
@@ -64,7 +63,8 @@ class HomeScreen extends StatelessWidget {
                         height: 20,
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(10,300,10,0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            10, 300, 10, 0),
                         child: Row(
                           children: const [
                             Text(
@@ -75,12 +75,12 @@ class HomeScreen extends StatelessWidget {
                                   fontSize: 20),
                             ),
                             Spacer(),
-
                           ],
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(300,400,10,0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            300, 400, 10, 0),
                         child: SmoothPageIndicator(
                           controller: pageController,
                           count: 3,
@@ -94,22 +94,28 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(10,400,10,0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            10, 400, 10, 0),
                         child: Row(
                           children: [
-                            DefaultButton(text: 'View Hotel', onClick: () {}),
+                            DefaultButton(
+                                text: 'View Hotel',
+                                onClick: () {
+                                  Navigator.of(context)
+                                      .pushNamed(Routes.exploreScreen);
+                                }),
                             Spacer(),
-                            // SmoothPageIndicator(
-                            //   controller: pageController,
-                            //   count: 3,
-                            //   effect: JumpingDotEffect(
-                            //     activeDotColor: AppColors.defaultColor,
-                            //     dotColor: AppColors.hintColor,
-                            //     dotHeight: 10,
-                            //     dotWidth: 10,
-                            //     spacing: 5,
-                            //   ),
-                            // ),
+                            SmoothPageIndicator(
+                              controller: pageController,
+                              count: 3,
+                              effect: JumpingDotEffect(
+                                activeDotColor: AppColors.defaultColor,
+                                dotColor: AppColors.hintColor,
+                                dotHeight: 10,
+                                dotWidth: 10,
+                                spacing: 5,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -198,17 +204,17 @@ class HomeScreen extends StatelessWidget {
                                         )
                                       ],
                                     ),
-                                    // RatingBarIndicator(
-                                    //   rating: 3,
-                                    //   itemBuilder: (context, index) =>
-                                    //       const Icon(
-                                    //     Icons.star,
-                                    //     color: AppColors.defaultColor,
-                                    //   ),
-                                    //   itemCount: 5,
-                                    //   itemSize: 20.0,
-                                    //   direction: Axis.horizontal,
-                                    // ),
+                                    RatingBarIndicator(
+                                      rating: 3,
+                                      itemBuilder: (context, index) =>
+                                          const Icon(
+                                        Icons.star,
+                                        color: AppColors.defaultColor,
+                                      ),
+                                      itemCount: 5,
+                                      itemSize: 20.0,
+                                      direction: Axis.horizontal,
+                                    ),
                                   ],
                                 ),
                               ),

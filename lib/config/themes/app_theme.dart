@@ -16,7 +16,8 @@ ThemeData appTheme() {
       textTheme: const TextTheme(
 
       bodyLarge: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
-      displaySmall:  TextStyle(fontSize: 16),
+      displaySmall:  TextStyle(fontSize: 16, color: Colors.grey),
+      bodySmall: TextStyle(fontSize: 16, color: Colors.black),
       displayMedium: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),
       headlineLarge:  TextStyle(fontSize: 30) ),
 

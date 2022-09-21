@@ -32,13 +32,14 @@ class ExploreScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(
-            height * 0.01, height * 0.02, height * 0.01, height * 0.03),
+            height * 0.01, 0, height * 0.01, height * 0),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
               pinned: true,
-              expandedHeight: height * 0.4,
-              flexibleSpace: FlexibleSpaceBar(
+              automaticallyImplyLeading: false,
+              expandedHeight: height * 0.35,
+              flexibleSpace: const FlexibleSpaceBar(
                 background: SliverAppbar(),
               ),
             ),
@@ -46,6 +47,7 @@ class ExploreScreen extends StatelessWidget {
                 delegate: SliverChildListDelegate([
               ListView.builder(
                 shrinkWrap: true,
+                physics: const ClampingScrollPhysics(),
                 itemCount: 10,
                 itemBuilder: (context, index) {
                 return HotelExploreItem();
