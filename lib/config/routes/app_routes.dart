@@ -2,27 +2,25 @@ import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/login_screen.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/register_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/home_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/main_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/edit_profile_screen.dart';
-import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/language_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/profile_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/setting_screen.dart';
-import 'package:booking_app_internship_algoriza/features/splash/presentation/screens/on_boarding_screen.dart';
-import 'package:booking_app_internship_algoriza/features/splash/presentation/screens/splash_screen.dart';
+import 'package:booking_app_internship_algoriza/main.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
-  static const String init = '/mainScreen';
+  static const String init = '/';
   static const String loginScreenRoute = "/login";
   static const String registerScreenRoute = "/register";
+
   static const String profileScreenRoute = "/profile";
   static const String editProfileScreenRoute = "/editProfile";
   static const String settingScreenRoute = "/setting";
   static const String exploreScreen = '/explore_screen';
-  static const String languageScreen = '/LanguageScreen';
-  static const String onBoardingRoute = '/onBoarding';
-  static const String splashScreen = '/';
+  static const String homeScreen = '/home_screen';
 }
 
 class RouteGenerator {
@@ -47,17 +45,14 @@ class RouteGenerator {
                   profileInfo: profileInfo,
                 ));
 
+      case Routes.homeScreen:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
+
       case Routes.exploreScreen:
         return MaterialPageRoute(builder: (_) => const ExploreScreen());
-      case Routes.languageScreen:
-        return MaterialPageRoute(builder: (_) => const LanguageScreen());
 
       case Routes.settingScreenRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
-      case Routes.onBoardingRoute:
-        return MaterialPageRoute(builder: (_) => OnBoardingScreen());
-      case Routes.splashScreen:
-        return MaterialPageRoute(builder: (_) => SplashScreen());
       default:
         return unDefinedRoute();
     }
