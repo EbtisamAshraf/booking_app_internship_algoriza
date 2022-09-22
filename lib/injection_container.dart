@@ -1,6 +1,7 @@
 import 'package:booking_app_internship_algoriza/core/api/api_consumer.dart';
 import 'package:booking_app_internship_algoriza/core/api/app_interceptors%20.dart';
 import 'package:booking_app_internship_algoriza/core/api/dio_consumer.dart';
+import 'package:booking_app_internship_algoriza/core/app_cubit.dart';
 import 'package:booking_app_internship_algoriza/core/network/network_info.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/data/data_sources/auth_remote_data_source.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/data/repositories/auth_repository_impl.dart';
@@ -31,6 +32,7 @@ Future<void> init() async {
   ///feature profile
   //bloc
   sl.registerFactory(() => ProfileCubit( getProfileInfoUseCase: sl() , updateInfoUseCase: sl()));
+
 
   // use case
   sl.registerLazySingleton(() => GetProfileInfoUseCase(sl()));
@@ -71,6 +73,7 @@ Future<void> init() async {
           () => ExploreRemoteDataSourceImpl(apiConsumer: sl()));
 
   // core
+  sl.registerFactory(() => AppCubit( ));
    sl.registerLazySingleton<NetworkInfo>(
        () => NetworkInfoImpl(connectionChecker: sl()));
 
