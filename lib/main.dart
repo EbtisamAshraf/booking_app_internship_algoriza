@@ -8,24 +8,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await di.init();
-  AppStrings.token =  di.sl<SharedPreferences>().getString('token') == null ? '': di.sl<SharedPreferences>().getString('token')!;
+  AppStrings.token = di.sl<SharedPreferences>().getString('token') == null
+      ? ''
+      : di.sl<SharedPreferences>().getString('token')!;
   BlocOverrides.runZoned(
-        () {
-          EasyLocalization(
-            path: 'resources/translation',
-            supportedLocales: const [
-              Locale('ar', 'AR'),
-              Locale('en', 'EN'),
-            ],
-            saveLocale: true,
-            child: const MyApp(),
-          );
+    () {
+      runApp(EasyLocalization(
+        path: 'assets/translation',
+        supportedLocales: const [
+          Locale('en', 'EN'),
+          Locale('ar', 'AR'),
+        ],
+        saveLocale: true,
+        child: const MyApp(),
+      ));
     },
     blocObserver: MyBlocObserver(),
   );
 }
-
-
