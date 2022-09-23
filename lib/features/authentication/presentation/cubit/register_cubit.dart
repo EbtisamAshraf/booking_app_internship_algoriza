@@ -29,8 +29,8 @@ class RegisterCubit extends Cubit<RegisterState> {
     ));
   }
 
-  bool isPasswordVisible = false;
-  bool isPasswordConfirmationVisible = false;
+  bool isPasswordVisible = true;
+  bool isPasswordConfirmationVisible = true;
   changePasswordVisibility(){
     isPasswordVisible = !isPasswordVisible;
     emit(ChangePasswordVisibilityState());

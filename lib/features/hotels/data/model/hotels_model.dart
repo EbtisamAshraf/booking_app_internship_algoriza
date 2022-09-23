@@ -5,11 +5,9 @@ class HotelsModel {
   HotelsModel({this.status, this.data});
 
   HotelsModel.fromJson(Map<String, dynamic> json) {
-    status =
-    json['status'] != null ?  Status.fromJson(json['status']) : null;
-    data = json['data'] != null ?  HotelDataModel.fromJson(json['data']) : null;
+    status = json['status'] != null ? Status.fromJson(json['status']) : null;
+    data = json['data'] != null ? HotelDataModel.fromJson(json['data']) : null;
   }
-
 }
 
 class Status {
@@ -24,7 +22,7 @@ class Status {
 
 class HotelDataModel {
   int? currentPage;
-  List<Data>? data;
+  List<DataHotels>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -37,23 +35,23 @@ class HotelDataModel {
 
   HotelDataModel(
       {this.currentPage,
-        this.data,
-        this.firstPageUrl,
-        this.from,
-        this.lastPage,
-        this.lastPageUrl,
-        this.links,
-        this.path,
-        this.perPage,
-        this.to,
-        this.total});
+      this.data,
+      this.firstPageUrl,
+      this.from,
+      this.lastPage,
+      this.lastPageUrl,
+      this.links,
+      this.path,
+      this.perPage,
+      this.to,
+      this.total});
 
   HotelDataModel.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <DataHotels>[];
       json['data'].forEach((v) {
-        data!.add( Data.fromJson(v));
+        data!.add(DataHotels.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -63,7 +61,7 @@ class HotelDataModel {
     if (json['links'] != null) {
       links = <Links>[];
       json['links'].forEach((v) {
-        links!.add( Links.fromJson(v));
+        links!.add(Links.fromJson(v));
       });
     }
     path = json['path'];
@@ -71,10 +69,9 @@ class HotelDataModel {
     to = json['to'];
     total = json['total'];
   }
-
 }
 
-class Data {
+class DataHotels {
   int? id;
   String? name;
   String? description;
@@ -88,21 +85,21 @@ class Data {
   List<HotelImages>? hotelImages;
   List<HotelFacilities>? hotelFacilities;
 
-  Data(
+  DataHotels(
       {this.id,
-        this.name,
-        this.description,
-        this.price,
-        this.address,
-        this.longitude,
-        this.latitude,
-        this.rate,
-        this.createdAt,
-        this.updatedAt,
-        this.hotelImages,
-        this.hotelFacilities});
+      this.name,
+      this.description,
+      this.price,
+      this.address,
+      this.longitude,
+      this.latitude,
+      this.rate,
+      this.createdAt,
+      this.updatedAt,
+      this.hotelImages,
+      this.hotelFacilities});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataHotels.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -116,18 +113,16 @@ class Data {
     if (json['hotel_images'] != null) {
       hotelImages = <HotelImages>[];
       json['hotel_images'].forEach((v) {
-        hotelImages!.add( HotelImages.fromJson(v));
+        hotelImages!.add(HotelImages.fromJson(v));
       });
     }
     if (json['hotel_facilities'] != null) {
       hotelFacilities = <HotelFacilities>[];
       json['hotel_facilities'].forEach((v) {
-        hotelFacilities!.add( HotelFacilities.fromJson(v));
+        hotelFacilities!.add(HotelFacilities.fromJson(v));
       });
     }
   }
-
-
 }
 
 class HotelImages {
@@ -135,9 +130,7 @@ class HotelImages {
   String? hotelId;
   String? image;
 
-
-  HotelImages(
-      {this.id, this.hotelId, this.image});
+  HotelImages({this.id, this.hotelId, this.image});
 
   HotelImages.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -151,16 +144,13 @@ class HotelFacilities {
   String? hotelId;
   String? facilityId;
 
-
-  HotelFacilities(
-      {this.id, this.hotelId, this.facilityId});
+  HotelFacilities({this.id, this.hotelId, this.facilityId});
 
   HotelFacilities.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     hotelId = json['hotel_id'];
     facilityId = json['facility_id'];
   }
-
 }
 
 class Links {
@@ -175,5 +165,4 @@ class Links {
     label = json['label'];
     active = json['active'];
   }
-
 }

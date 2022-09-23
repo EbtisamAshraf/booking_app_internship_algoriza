@@ -1,8 +1,6 @@
 import 'package:booking_app_internship_algoriza/core/widgets/custom_search_form.dart';
-import 'package:booking_app_internship_algoriza/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_divider/auto_divider.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
