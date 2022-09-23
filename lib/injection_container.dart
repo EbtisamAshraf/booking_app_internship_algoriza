@@ -9,6 +9,7 @@ import 'package:booking_app_internship_algoriza/features/authentication/domain/u
 import 'package:booking_app_internship_algoriza/features/authentication/domain/use_cases/register_user.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/cubit/login_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/cubit/register_cubit.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/data_sources/profile_remote_data_source.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:booking_app_internship_algoriza/features/profile/domain/repositories/profile_repository.dart';
@@ -28,6 +29,19 @@ import 'features/hotels/domain/use_cases/explore_use_cases.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
+  ///feature hotel
+  //bloc
+  sl.registerFactory(() => HotelsCubit( exploreUseCase: sl()));
+  //use case
+  sl.registerLazySingleton(() => ExploreUseCase(sl()));
+  //Repository
+  sl.registerLazySingleton<ExploreRepository>(() => ExploreRepositoryImpl(
+      networkInfo: sl(),
+      exploreRemoteDataSource: sl()));
+  // data source
+  sl.registerLazySingleton<ExploreRemoteDataSource>(
+          () => ExploreRemoteDataSourceImpl(apiConsumer: sl()));
+
   ///feature profile
   //bloc
   sl.registerFactory(() => ProfileCubit( getProfileInfoUseCase: sl() , updateInfoUseCase: sl()));
@@ -52,23 +66,16 @@ Future<void> init() async {
   // use case
   sl.registerLazySingleton(() => LoginUserUseCase(sl()));
   sl.registerLazySingleton(() => RegisterUserUseCase(sl()));
-  sl.registerLazySingleton(() => ExploreUseCase(sl()));
+
  //  //Repository
 
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
       networkInfo: sl(),
       authRemoteDataSource: sl()));
 
-  sl.registerLazySingleton<ExploreRepository>(() => ExploreRepositoryImpl(
-      networkInfo: sl(),
-      exploreRemoteDataSource: sl()));
-
  //  // data source
   sl.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(apiConsumer: sl()));
-
-  sl.registerLazySingleton<ExploreRemoteDataSource>(
-          () => ExploreRemoteDataSourceImpl(apiConsumer: sl()));
 
   // core
    sl.registerLazySingleton<NetworkInfo>(

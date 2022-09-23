@@ -1,4 +1,3 @@
-import 'package:booking_app_internship_algoriza/config/themes/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';

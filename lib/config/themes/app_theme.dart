@@ -8,6 +8,7 @@ ThemeData appTheme() {
       primaryColor: AppColors.primaryColor,
       scaffoldBackgroundColor: Colors.white,
       appBarTheme: const AppBarTheme(
+
         iconTheme: IconThemeData(color: Colors.black),
           centerTitle: true,
           backgroundColor: Colors.transparent,
@@ -18,7 +19,8 @@ ThemeData appTheme() {
       bodyLarge: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
       displaySmall:  TextStyle(fontSize: 16),
       displayMedium: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),
-      headlineLarge:  TextStyle(fontSize: 30) ),
+      headlineLarge:  TextStyle(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),
+      ),
 
 
   );

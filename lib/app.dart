@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'booking',
       theme: appTheme(),
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.init ,
+        initialRoute: Routes.loginScreenRoute ,
 
     );
   }

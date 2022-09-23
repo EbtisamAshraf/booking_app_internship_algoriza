@@ -25,7 +25,10 @@ dependencies:
   get_it: ^7.2.0
   internet_connection_checker: ^0.0.1+4
   shared_preferences: ^2.0.15
+  font_awesome_flutter:
+  carousel_slider:
   easy_localization:
+  cached_network_image:
 
 
 
@@ -43,8 +46,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
 
-    - assets/resources/translation/ar-AR.json
-    - assets/resources/translation/en-EN.json
+    - assets/translation/ar-AR.json
+    - assets/translation/en-EN.json
     - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
