@@ -1,6 +1,27 @@
 {
 
-  "Notifications":"Notifications"
+  "Notifications":"Notifications",
+  "Login":"Login",
+  "Create account":"Create account",
+  "Facebook":"Facebook",
+  "Twitter":"Twitter",
+  "or log in with email":"or log in with email",
+  "Your email":"Your email",
+  "Password":"Password",
+  "Forgot your Password?":"Forgot your Password?",
+  "enter your email":"enter your email",
+  "enter your password":"enter your password",
+  "please enter your email address":"please enter your email address",
+  "please enter valid email":"please enter valid email",
+  "please enter your password":"please enter your password",
+  "password is too short":"password is too short",
+  "Sign Up":"Sign Up",
+  "Your name":"Your name",
+  "enter your name":"enter your name",
+  "By Signing up,you agreed with our terms of  Services an privacy policy":"By Signing up,you agreed with our terms of  Services an privacy policy",
+  "Already have account?":"Already have account?",
+  "password is not matched":"password is not matched",
+  "Don't have an account?":"Don't have an account?"
 
 
 }
