@@ -1,3 +1,4 @@
+import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/hotel_explore_item.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/sliver_appbar.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,9 @@ class ExploreScreen extends StatelessWidget {
         ),
         actions: [
           InkWell(
-              onTap: (() {}),
+              onTap: (() {
+                Navigator.of(context).pushNamed(Routes.mapScreen);
+              }),
               child: Padding(
                 padding: EdgeInsets.only(right: height * 0.02),
                 child: Image.asset(
@@ -31,8 +34,8 @@ class ExploreScreen extends StatelessWidget {
         leading: const Icon(Icons.arrow_back, color: Colors.black, size: 30),
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(
-            height * 0.01, 0, height * 0.01, height * 0),
+        padding:
+            EdgeInsets.fromLTRB(height * 0.01, 0, height * 0.01, height * 0),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -46,12 +49,12 @@ class ExploreScreen extends StatelessWidget {
             SliverList(
                 delegate: SliverChildListDelegate([
               ListView.builder(
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                return HotelExploreItem();
-              }),
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return HotelExploreItem();
+                  }),
             ]))
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:booking_app_internship_algoriza/features/authentication/presenta
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/home_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/main_screen.dart';
+import 'package:booking_app_internship_algoriza/features/map/screen/map_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/profile_screen.dart';
@@ -21,6 +22,7 @@ class Routes {
   static const String settingScreenRoute = "/setting";
   static const String exploreScreen = '/explore_screen';
   static const String homeScreen = '/home_screen';
+  static const String mapScreen = '/map_screen';
 }
 
 class RouteGenerator {
@@ -50,6 +52,9 @@ class RouteGenerator {
 
       case Routes.exploreScreen:
         return MaterialPageRoute(builder: (_) => const ExploreScreen());
+
+      case Routes.mapScreen:
+        return MaterialPageRoute(builder: (_) => const MapScreen());
 
       case Routes.settingScreenRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
