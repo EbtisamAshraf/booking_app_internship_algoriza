@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // bool? isDarkMode = false;
     bool? isDarkMode = di.sl<SharedPreferences>().getBool('isDark');
     return BlocProvider(
       create: (context) =>

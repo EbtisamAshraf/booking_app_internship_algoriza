@@ -1,5 +1,6 @@
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/widgets/edit_profile_screen_item.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class EditProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children:  [
-             Text('Edit Profile',style: Theme.of(context).textTheme.displayMedium,),
+             Text('Edit Profile'.tr(),style: Theme.of(context).textTheme.displayMedium,),
             const SizedBox(height: 10,),
             Center(
               child: Stack(
@@ -34,11 +35,11 @@ class EditProfileScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20,),
-             EditProfileOrSettingScreenItem(title: 'User Name',info:profileInfo.data!.name! ,),
-             EditProfileOrSettingScreenItem(title: 'Email',info:profileInfo.data!.email! ,),
-            const EditProfileOrSettingScreenItem(title: 'Phone',info:'+02 0123456789' ,),
-            const EditProfileOrSettingScreenItem(title: 'Date of Birth',info:'20, Aug, 1990' ,),
-            const EditProfileOrSettingScreenItem(title: 'Address',info:'123 Royal Street, New York' ,),
+             EditProfileOrSettingScreenItem(title: 'User Name'.tr(),info:profileInfo.data!.name! ,),
+             EditProfileOrSettingScreenItem(title: 'Email'.tr(),info:profileInfo.data!.email! ,),
+             EditProfileOrSettingScreenItem(title: 'Phone'.tr(),info:'+02 0123456789' ,),
+             EditProfileOrSettingScreenItem(title: 'Date of Birth'.tr(),info:'20, Aug, 1990' ,),
+             EditProfileOrSettingScreenItem(title: 'Address'.tr(),info:'123 Royal Street, New York' ,),
           ],
         ),
       ),
