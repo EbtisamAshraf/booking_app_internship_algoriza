@@ -4,8 +4,6 @@ import 'package:booking_app_internship_algoriza/features/hotels/data/model/facil
 import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -16,8 +14,11 @@ import '../../domain/use_cases/explore_use_cases.dart';
 
 class HotelDetailsScreen extends StatelessWidget {
   final DataHotels hotelDetails;
-  // final FacilitiesData facilitiesData;
-  HotelDetailsScreen({required this.hotelDetails});
+  // final FacilitiesData facilitiesData ;
+  HotelDetailsScreen({required this.hotelDetails,
+   // this.facilitiesData
+  }
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,6 @@ class HotelDetailsScreen extends StatelessWidget {
               ? const Center(child: CustomLoadingWidget())
                   : state is HotelsLoadedState ?
               Scaffold(
-                backgroundColor: AppColors.backgroundColorLight,
                 appBar: PreferredSize(
                   preferredSize: Size.fromHeight(context.hight / 2.1),
                   child: Stack(
@@ -136,15 +136,16 @@ class HotelDetailsScreen extends StatelessWidget {
                                     width: 120,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: Colors.black54.withOpacity(.1)),
+                                        color:AppColors.hintColor.withOpacity(.1)
+                                    ),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      children: const [
-                                        Icon(Icons.wifi),
-                                        SizedBox(
+                                      children:  [
+                                        Icon(Icons.wifi,color: AppColors.hintColor,),
+                                    const    SizedBox(
                                           width: 5,
                                         ),
-                                        Text('Wifi')
+                                        Text('Wifi',style: Theme.of(context).textTheme.bodySmall,)
                                       ],
                                     ));
                               },
@@ -160,7 +161,7 @@ class HotelDetailsScreen extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                         Text(hotelDetails.description!),
+                         Text(hotelDetails.description!,style: Theme.of(context).textTheme.bodySmall,),
                         const SizedBox(
                           height: 80,
                         ),
@@ -169,7 +170,7 @@ class HotelDetailsScreen extends StatelessWidget {
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.black54.withOpacity(.1)),
+                              color:AppColors.hintColor.withOpacity(.1)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Column(
@@ -194,7 +195,7 @@ class HotelDetailsScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                 Text('${hotelDetails.rate} Rate'),
+                                 Text('${hotelDetails.rate} Rate',style: TextStyle(color: AppColors.hintColor),),
                               ],
                             ),
                           ),

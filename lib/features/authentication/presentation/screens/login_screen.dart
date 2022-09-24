@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../core/utils/validator.dart';
 import '../../../../core/widgets/text_form_field.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
