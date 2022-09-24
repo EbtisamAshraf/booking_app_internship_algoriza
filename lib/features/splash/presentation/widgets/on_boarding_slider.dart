@@ -1,3 +1,4 @@
+import 'package:booking_app_internship_algoriza/core/utils/app_colors.dart';
 import 'package:booking_app_internship_algoriza/features/splash/data/models/onboarrding_model.dart';
 import 'package:flutter/material.dart';
 
@@ -35,8 +36,9 @@ class OnBoardingSlider extends StatelessWidget {
               horizontal: 20.0),
           child: Text(
             listOnBoardingSlider[index].body,
-            style: textTheme.bodyText2!
-                .copyWith(height: 2),
+            style: TextStyle(color: AppColors.hintColor),
+            // textTheme.bodyText2!
+            //     .copyWith(height: 2),
             textAlign: TextAlign.center,
           ),
         ),
