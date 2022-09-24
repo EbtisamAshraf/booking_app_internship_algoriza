@@ -1,5 +1,6 @@
 import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/app_cubit.dart';
+import 'package:booking_app_internship_algoriza/core/utils/app_colors.dart';
 import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/widgets/edit_profile_screen_item.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/widgets/profile_screen_item.dart';
@@ -20,21 +21,23 @@ class SettingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Setting',style: Theme.of(context).textTheme.displayMedium,),
+              Text('Setting'.tr(),style: Theme.of(context).textTheme.displayMedium,),
               const SizedBox(height: 40,),
                ProfileOrSettingScreenItem(text: 'Notifications'.tr(),iconData: Icons.notifications),
-               ProfileOrSettingScreenItem(text: 'Theme Mode',widget: Switch(value: AppCubit.get(context).isDark, onChanged: (value){
+               ProfileOrSettingScreenItem(text: 'Theme Mode'.tr(),widget: Switch(
+                   activeColor: AppColors.defaultColor,
+                   value: AppCubit.get(context).isDark, onChanged: (value){
                 AppCubit.get(context).initDarkMode();
               })),
-              const ProfileOrSettingScreenItem(text: 'Fonts',iconData: Icons.font_download),
-              const ProfileOrSettingScreenItem(text: 'Color',iconData: Icons.color_lens),
-               ProfileOrSettingScreenItem(text: 'Language',iconData: Icons.translate,onTap: ()=>  Navigator.pushNamed(context, Routes.languageScreen)),
-              const EditProfileOrSettingScreenItem(title: 'Country',info: 'Egypt' ,),
-              const EditProfileOrSettingScreenItem(title: 'Currency',info: '\$ US' ,),
-              const ProfileOrSettingScreenItem(text: 'Terms of Services',iconData: Icons.arrow_forward_ios,size:18 ),
-              const ProfileOrSettingScreenItem(text: 'Privacy Policy',iconData: Icons.arrow_forward_ios ,size:18),
-              const ProfileOrSettingScreenItem(text: 'Give us Feedbacks',iconData: Icons.arrow_forward_ios ,size:18),
-               ProfileOrSettingScreenItem(text: 'Log out',iconData: Icons.arrow_forward_ios ,size:18,onTap: (){
+               ProfileOrSettingScreenItem(text: 'Fonts'.tr(),iconData: Icons.font_download),
+               ProfileOrSettingScreenItem(text: 'Color'.tr(),iconData: Icons.color_lens),
+               ProfileOrSettingScreenItem(text: 'Language'.tr(),iconData: Icons.translate,onTap: ()=>  Navigator.pushNamed(context, Routes.languageScreen)),
+               EditProfileOrSettingScreenItem(title: 'Country'.tr(),info: 'Egypt' ,),
+               EditProfileOrSettingScreenItem(title: 'Currency'.tr(),info: '\$ US' ,),
+               ProfileOrSettingScreenItem(text: 'Terms of Services'.tr(),iconData: Icons.arrow_forward_ios,size:18 ),
+               ProfileOrSettingScreenItem(text: 'Privacy Policy'.tr(),iconData: Icons.arrow_forward_ios ,size:18),
+               ProfileOrSettingScreenItem(text: 'Give us Feedbacks'.tr(),iconData: Icons.arrow_forward_ios ,size:18),
+               ProfileOrSettingScreenItem(text: 'Log out'.tr(),iconData: Icons.arrow_forward_ios ,size:18,onTap: (){
                 AppStrings.token = '';
                 di.sl<SharedPreferences>().remove('token');
                 Navigator.pushNamed(context, Routes.loginScreenRoute);

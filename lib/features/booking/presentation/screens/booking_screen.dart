@@ -12,42 +12,35 @@ class BookingScreen extends StatelessWidget {
       length: 3,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: AppColors.backgroundColorLight,
           appBar: AppBar(
-            title: Text('My Booking',
-                style: Theme.of(context).textTheme.headlineLarge),
-            centerTitle: false,
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(60),
+              preferredSize: Size.fromHeight(70),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Text('My Booking',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge),
+                    SizedBox(height: 10,),
                     SizedBox(
                       height: 60,
                       width: double.infinity,
                       child: Card(
-                          color: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child:  TabBar(
                             tabs: const [
-                              Text('Upcoming ',
-                                  style:
-                                      TextStyle(color: AppColors.defaultColor)),
-                              Text('Completed',
-                                  style:
-                                      TextStyle(color: AppColors.defaultColor)),
-                              Text('Cancelled ',
-                                  style:
-                                      TextStyle(color: AppColors.defaultColor)),
+                              Text('Upcoming ',),
+                              Text('Completed',),
+                              Text('Cancelled ',),
                             ],
-                            indicatorColor: Colors.white,
-                            indicatorSize: TabBarIndicatorSize.label,
-                            isScrollable: true,
+                            indicator: BoxDecoration(),
+                            labelColor: AppColors.defaultColor,
                             unselectedLabelColor: AppColors.hintColor,
                           )),
                     )

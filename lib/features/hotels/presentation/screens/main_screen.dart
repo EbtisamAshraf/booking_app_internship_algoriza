@@ -2,7 +2,10 @@ import 'package:booking_app_internship_algoriza/core/utils/app_colors.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/home_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/profile_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../../booking/presentation/screens/booking_screen.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -18,8 +21,8 @@ class _MainScreenState extends State<MainScreen> {
   int currentIndexScreen = 0;
 
   List<Widget> screens = [
-   HomeScreen(),
-    Container(),
+   const HomeScreen(),
+    const BookingScreen(),
     const ProfileScreen(),
   ];
 
@@ -56,21 +59,21 @@ class _MainScreenState extends State<MainScreen> {
                 currentIndexScreen = index;
               });
             },
-            items: const [
+            items:  [
               BottomNavigationBarItem(
                 icon:
-                Icon(Icons.search),
-                label: 'Explore'
+                const Icon(Icons.search),
+                label: 'Explore'.tr()
               ),
               BottomNavigationBarItem(
                 icon:
-                Icon(Icons.favorite_border),
-                  label: 'booking'
+                const Icon(Icons.favorite_border),
+                  label: 'booking'.tr()
               ),
               BottomNavigationBarItem(
                 icon:
-                Icon(Icons.person_outline),
-                  label: 'Profile'
+                const Icon(Icons.person_outline),
+                  label: 'Profile'.tr()
               ),
 
             ],
