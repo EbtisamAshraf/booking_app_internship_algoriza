@@ -1,12 +1,21 @@
 import 'dart:async';
 
+import 'package:booking_app_internship_algoriza/core/widgets/custom_loading_widget.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_search_form.dart';
+import 'package:booking_app_internship_algoriza/core/widgets/hotel_explore_item.dart';
+import 'package:booking_app_internship_algoriza/core/widgets/hotel_home_item.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/explore_use_cases.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
 import 'package:booking_app_internship_algoriza/features/map/data/location_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -16,6 +25,8 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  List<DataHotels>? dataHotels;
+  final controller = PageController();
   static Position? position;
   Completer<GoogleMapController> _controller = Completer();
 
@@ -46,6 +57,22 @@ class _MapScreenState extends State<MapScreen> {
       },
     );
   }
+
+  Widget buildPageView() {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+          return Container(
+            height: height * 0.1,
+            width: double.infinity,
+            child: PageView.builder(
+                controller: controller,
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return HotelHomeItem();
+                }),
+          );
+        }
 
   @override
   void initState() {
@@ -169,13 +196,20 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ),
       ),
-      body: position != null
-          ? buildMap()
-          : const Center(
-              child: CircularProgressIndicator(
-                color: Colors.blue,
-              ),
-            ),
+      body: Stack(
+        alignment: Alignment.bottomLeft,
+        fit: StackFit.expand,
+        children: [
+          position != null
+              ? buildMap()
+              : const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.blue,
+                  ),
+                ),
+          buildPageView(),
+        ],
+      ),
     );
   }
 }
