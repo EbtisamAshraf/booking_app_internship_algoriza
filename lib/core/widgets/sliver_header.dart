@@ -46,25 +46,30 @@ class SliverHeader implements SliverPersistentHeaderDelegate {
             padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
             child: Container(
               width: double.infinity,
-              height: 45,
+              height: 48,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                color: Colors.white,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.search,
-                      color: AppColors.defaultColor,
-                    ),
-                    Text(
-                      'Where are you going?',
-                      style:
-                          TextStyle(color: AppColors.hintColor, fontSize: 14),
-                    )
-                  ],
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius:
+                    BorderRadius.circular(25)),
+                shadowColor: Color(0xFF6D6D6D).withOpacity(0.2),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.search,
+                        color: AppColors.defaultColor,
+                      ),
+                      Text(
+                        'Where are you going?',
+                        style:
+                            TextStyle(color: AppColors.hintColor, fontSize: 14),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

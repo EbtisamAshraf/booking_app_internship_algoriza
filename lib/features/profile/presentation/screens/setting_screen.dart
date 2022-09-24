@@ -1,5 +1,6 @@
 import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/app_cubit.dart';
+import 'package:booking_app_internship_algoriza/core/utils/app_colors.dart';
 import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/widgets/edit_profile_screen_item.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/widgets/profile_screen_item.dart';
@@ -23,7 +24,9 @@ class SettingScreen extends StatelessWidget {
               Text('Setting',style: Theme.of(context).textTheme.displayMedium,),
               const SizedBox(height: 40,),
                ProfileOrSettingScreenItem(text: 'Notifications'.tr(),iconData: Icons.notifications),
-               ProfileOrSettingScreenItem(text: 'Theme Mode',widget: Switch(value: AppCubit.get(context).isDark, onChanged: (value){
+               ProfileOrSettingScreenItem(text: 'Theme Mode',widget: Switch(
+                 activeColor: AppColors.defaultColor,
+                   value: AppCubit.get(context).isDark, onChanged: (value){
                 AppCubit.get(context).initDarkMode();
               })),
               const ProfileOrSettingScreenItem(text: 'Fonts',iconData: Icons.font_download),

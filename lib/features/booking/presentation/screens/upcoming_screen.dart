@@ -1,10 +1,8 @@
-import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/hotel_details.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/widgets/custom_loading_widget.dart';
 
 class UpComingScreen extends StatelessWidget {
   const UpComingScreen({Key? key}) : super(key: key);
@@ -74,11 +72,10 @@ class UpComingScreen extends StatelessWidget {
                     MainAxisAlignment.start,
                     children: [
                       Text(
-                      '  Hotel Name',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                        ),
+                      'Hotel Name',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
                       ),
                       const SizedBox(
                         height: 5,
@@ -116,13 +113,9 @@ class UpComingScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   'EGP 200',
-                                  style: const TextStyle(
-                                      color: Colors
-                                          .black,
-                                      fontSize: 18,
-                                      fontWeight:
-                                      FontWeight
-                                          .bold),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall,
                                 )
                               ],
                             ),
