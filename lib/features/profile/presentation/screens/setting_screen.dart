@@ -1,4 +1,5 @@
 import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
+import 'package:booking_app_internship_algoriza/core/app_cubit.dart';
 import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/widgets/edit_profile_screen_item.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/widgets/profile_screen_item.dart';
@@ -22,10 +23,12 @@ class SettingScreen extends StatelessWidget {
               Text('Setting',style: Theme.of(context).textTheme.displayMedium,),
               const SizedBox(height: 40,),
                ProfileOrSettingScreenItem(text: 'Notifications'.tr(),iconData: Icons.notifications),
-              const ProfileOrSettingScreenItem(text: 'Theme Mode',iconData: Icons.brightness_medium_rounded),
+               ProfileOrSettingScreenItem(text: 'Theme Mode',widget: Switch(value: AppCubit.get(context).isDark, onChanged: (value){
+                AppCubit.get(context).initDarkMode();
+              })),
               const ProfileOrSettingScreenItem(text: 'Fonts',iconData: Icons.font_download),
               const ProfileOrSettingScreenItem(text: 'Color',iconData: Icons.color_lens),
-              const ProfileOrSettingScreenItem(text: 'Language',iconData: Icons.translate),
+               ProfileOrSettingScreenItem(text: 'Language',iconData: Icons.translate,onTap: ()=>  Navigator.pushNamed(context, Routes.languageScreen)),
               const EditProfileOrSettingScreenItem(title: 'Country',info: 'Egypt' ,),
               const EditProfileOrSettingScreenItem(title: 'Currency',info: '\$ US' ,),
               const ProfileOrSettingScreenItem(text: 'Terms of Services',iconData: Icons.arrow_forward_ios,size:18 ),

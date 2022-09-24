@@ -14,14 +14,18 @@ void main() async {
   AppStrings.token = di.sl<SharedPreferences>().getString('token') == null
       ? ''
       : di.sl<SharedPreferences>().getString('token')!;
-  BlocOverrides.runZoned(() {
-    runApp(EasyLocalization(
+  BlocOverrides.runZoned(
+    () {
+      runApp(EasyLocalization(
         path: 'assets/translation',
         supportedLocales: const [
           Locale('en', 'EN'),
           Locale('ar', 'AR'),
         ],
         saveLocale: true,
-        child: const MyApp()));
-  }, blocObserver: MyBlocObserver());
+        child: const MyApp(),
+      ));
+    },
+    blocObserver: MyBlocObserver(),
+  );
 }

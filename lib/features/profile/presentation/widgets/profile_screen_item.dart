@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ProfileOrSettingScreenItem extends StatelessWidget {
-  const ProfileOrSettingScreenItem({Key? key, this.onTap, required this.text, required this.iconData, this.size}) : super(key: key);
+  const ProfileOrSettingScreenItem({Key? key, this.onTap, required this.text,  this.iconData, this.size, this.widget}) : super(key: key);
   final GestureTapCallback? onTap;
   final String text;
-  final IconData iconData;
+  final IconData? iconData;
+  final Widget? widget;
   final double? size;
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ProfileOrSettingScreenItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(text,style: Theme.of(context).textTheme.displaySmall),
-              Icon(iconData,color: Colors.grey,size:size  ,)
+              iconData == null? widget! : Icon(iconData,color: Colors.grey,size:size  ,)
             ],),
         ),
         const SizedBox(height: 10,),
