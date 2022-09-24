@@ -27,6 +27,7 @@ dependencies:
   shared_preferences: ^2.0.15
   smooth_page_indicator:
   font_awesome_flutter:
+  cached_network_image:
   carousel_slider:
 
 dev_dependencies:

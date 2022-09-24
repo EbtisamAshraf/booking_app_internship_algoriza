@@ -5,6 +5,8 @@ import 'package:booking_app_internship_algoriza/features/hotels/presentation/scr
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../booking/presentation/screens/booking_screen.dart';
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -19,8 +21,8 @@ class _MainScreenState extends State<MainScreen> {
   int currentIndexScreen = 0;
 
   List<Widget> screens = [
-   HomeScreen(),
-    Container(),
+   const HomeScreen(),
+    const BookingScreen(),
     const ProfileScreen(),
   ];
 
