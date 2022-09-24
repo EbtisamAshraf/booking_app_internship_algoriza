@@ -3,6 +3,7 @@ import 'package:booking_app_internship_algoriza/core/widgets/custom_loading_widg
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/widgets/profile_screen_item.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
                                     style: Theme.of(context)
                                         .textTheme
                                         .displayMedium),
-                                Text('View and Edit profile',
+                                Text('View and Edit profile'.tr(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .displaySmall),
@@ -62,18 +63,18 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                const ProfileOrSettingScreenItem(
-                    text: 'Change Password', iconData: Icons.lock_outline),
-                const ProfileOrSettingScreenItem(
-                    text: 'Invite Friend', iconData: Icons.person_outline),
-                const ProfileOrSettingScreenItem(
-                    text: 'Credit & coupons', iconData: Icons.card_giftcard),
-                const ProfileOrSettingScreenItem(
-                    text: 'Help Center', iconData: Icons.info_outline),
-                const ProfileOrSettingScreenItem(
-                    text: 'Payment', iconData: Icons.payment),
+                 ProfileOrSettingScreenItem(
+                    text: 'Change Password'.tr(), iconData: Icons.lock_outline),
+                 ProfileOrSettingScreenItem(
+                    text: 'Invite Friend'.tr(), iconData: Icons.person_outline),
+                 ProfileOrSettingScreenItem(
+                    text: 'Credit & coupons'.tr(), iconData: Icons.card_giftcard),
+                 ProfileOrSettingScreenItem(
+                    text: 'Help Center'.tr(), iconData: Icons.info_outline),
+                 ProfileOrSettingScreenItem(
+                    text: 'Payment'.tr(), iconData: Icons.payment),
                 ProfileOrSettingScreenItem(
-                    text: 'Setting',
+                    text: 'Setting'.tr(),
                     iconData: Icons.settings,
                     onTap: () => Navigator.pushNamed(
                         context, Routes.settingScreenRoute)),

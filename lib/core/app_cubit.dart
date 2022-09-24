@@ -28,6 +28,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Languages? language  ;
+
   var locale = const Locale('en', 'EN');
   changeLanguage(value){
     emit(AppInitial());

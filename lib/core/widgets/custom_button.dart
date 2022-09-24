@@ -5,6 +5,8 @@ Widget customElevatedButton(
     {required BuildContext context,
     double width = 1,
     required String text,
+      final Color color = AppColors.defaultColor,
+      final Color textColor =Colors.white,
 
     required VoidCallback? onPressed}) {
   return SizedBox(
@@ -14,9 +16,9 @@ Widget customElevatedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        color: AppColors.defaultColor,
-        child: TextButton(onPressed: onPressed, child: Text(text,style: const TextStyle(
-          color: Colors.white,
+        color: color,
+        child: TextButton(onPressed: onPressed, child: Text(text,style:  TextStyle(
+          color:textColor,
 
         ),))),
   );

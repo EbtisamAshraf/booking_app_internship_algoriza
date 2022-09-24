@@ -48,8 +48,8 @@ class ActiveDot extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: Container(
-        width: 25,
-        height: 8,
+        width: 10,
+        height: 10,
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(5),
@@ -70,7 +70,7 @@ class InactiveDot extends StatelessWidget {
         width: 8,
         height: 8,
         decoration: BoxDecoration(
-          color: AppColors.lightPrimaryColor,
+          color: AppColors.hintColor,
           borderRadius: BorderRadius.circular(5),
         ),
       ),
