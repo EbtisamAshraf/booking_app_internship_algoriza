@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
       create: (context) =>
       di.sl<HotelsCubit>()..getHotels(exploreHotel: ExploreHotel(page: 1)),
       child: Scaffold(
-          backgroundColor: AppColors.backgroundColorLight,
           body: BlocConsumer<HotelsCubit, HotelStates>(
               listener: (context, state) {},
               builder: (context, state) => state is HotelsLoadingState
@@ -66,7 +65,8 @@ class HomeScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            HotelDetailsScreen(hotelDetails: state.hotelsModel.data!.data![index])));
+                                            HotelDetailsScreen(hotelDetails: state.hotelsModel.data!.data![index]),
+                                    ));
                               },
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -81,6 +81,7 @@ class HomeScreen extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                         BorderRadius.circular(15)),
+                                    shadowColor: Color(0xFF6D6D6D).withOpacity(0.2),
                                     child: Row(
                                       crossAxisAlignment:
                                       CrossAxisAlignment.start,
@@ -127,10 +128,9 @@ class HomeScreen extends StatelessWidget {
                                               Text(
                                                 state.hotelsModel.data!
                                                     .data![index].name!,
-                                                style: const TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.black,
-                                                ),
+                                                  style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall
                                               ),
                                               const SizedBox(
                                                 height: 5,
@@ -169,13 +169,9 @@ class HomeScreen extends StatelessWidget {
                                                         ),
                                                         Text(
                                                           'EGP ${state.hotelsModel.data!.data![index].price}',
-                                                          style: const TextStyle(
-                                                              color: Colors
-                                                                  .black,
-                                                              fontSize: 18,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                          style: Theme.of(context)
+                                                              .textTheme
+                                                              .headlineSmall,
                                                         )
                                                       ],
                                                     ),

@@ -2,14 +2,12 @@ import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/core/utils/assets_manager.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_button.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/login_screen.dart';
-import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/register_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/main_screen.dart';
 import 'package:booking_app_internship_algoriza/features/splash/data/models/onboarrding_model.dart';
 import 'package:booking_app_internship_algoriza/features/splash/presentation/cubit/onboarding_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/splash/presentation/cubit/onboarding_state.dart';
 import 'package:booking_app_internship_algoriza/features/splash/presentation/widgets/custom_indicator.dart';
 import 'package:booking_app_internship_algoriza/features/splash/presentation/widgets/on_boarding_slider.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,16 +22,16 @@ class OnBoardingScreen extends StatelessWidget {
     List<OnBoardingModel> onBoardingList = [
       OnBoardingModel(
           image: ImageAssets.onBoardingImage1,
-          title: Text('Plan your trips'.tr(),style: Theme.of(context).textTheme.displayMedium),
-          body:'on Boarding body 1'.tr()),
+          title: Text('Plan your trips',style: Theme.of(context).textTheme.displayMedium),
+          body:' book one of your unique hotel to\nescape the ordinary'),
       OnBoardingModel(
           image: ImageAssets.onBoardingImage2,
-          title: Text('Find best deals'.tr(),style: Theme.of(context).textTheme.displayMedium),
-          body:  'on Boarding body 2'.tr()),
+          title: Text('Find best deals',style: Theme.of(context).textTheme.displayMedium),
+          body:  'Find deals for any season from cosy\ncountry homes to city flats'),
       OnBoardingModel(
           image: ImageAssets.onBoardingImage3,
-          title: Text('Best travelling all time'.tr(),style: Theme.of(context).textTheme.displayMedium),
-          body: 'on Boarding body 3'.tr()),
+          title: Text('Best travelling all time',style: Theme.of(context).textTheme.displayMedium),
+          body: 'Find deals for any season from cosy\ncountry homes to city flats'),
     ];
 
     return SafeArea(
@@ -83,28 +81,15 @@ class OnBoardingScreen extends StatelessWidget {
                     height: 30,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: customElevatedButton(onPressed: (){
                       OnBoardingCubit.get(context).changeIsSkip();
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (C) => AppStrings.token.isEmpty? LoginScreen() :MainScreen()));
-                    } ,text: 'Login'.tr(), context: context,),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 80.0),
-                    child: customElevatedButton(onPressed: (){
-                      OnBoardingCubit.get(context).changeIsSkip();
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (C) => AppStrings.token.isEmpty? const RegisterScreen() :MainScreen()));
-                    } ,text: 'Create account'.tr(), context: context,color: Colors.white70,textColor: Colors.black),
-                  ),
+                    } ,text: 'LOGIN', context: context,),
+                  )
                 ],
               );
             },

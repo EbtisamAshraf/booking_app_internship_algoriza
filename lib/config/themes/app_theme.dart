@@ -10,10 +10,6 @@ ThemeData appTheme() {
     ),
       primaryColor: AppColors.primaryColor,
        scaffoldBackgroundColor: Colors.white,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
-
-    ),
       appBarTheme: const AppBarTheme(
 
         iconTheme: IconThemeData(color: Colors.black),
@@ -40,11 +36,6 @@ ThemeData appDarkTheme() {
       fillColor:  MaterialStateProperty.all(Colors.white),
 
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.black,
-
-    ),
-
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: Colors.black38,
     appBarTheme: const AppBarTheme(
