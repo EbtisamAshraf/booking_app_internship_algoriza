@@ -1,9 +1,7 @@
 import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/core/utils/assets_manager.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_button.dart';
-import 'package:booking_app_internship_algoriza/core/widgets/default_button.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/login_screen.dart';
-import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/register_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/main_screen.dart';
 import 'package:booking_app_internship_algoriza/features/splash/data/models/onboarrding_model.dart';
 import 'package:booking_app_internship_algoriza/features/splash/presentation/cubit/onboarding_cubit.dart';
@@ -44,8 +42,6 @@ class OnBoardingScreen extends StatelessWidget {
             listener: (context, state) {},
             builder: (context, state) {
               return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.6,
@@ -93,17 +89,6 @@ class OnBoardingScreen extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (C) => AppStrings.token.isEmpty? LoginScreen() :MainScreen()));
                     } ,text: 'LOGIN', context: context,),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40.0,vertical: 10),
-                    child: DefaultButton(
-                      width: double.infinity,
-                      textColor: Colors.black,
-                      background: Colors.white,
-                        text: 'Create account', onClick: (){
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const RegisterScreen()));
-                    }
-                    ),
                   )
                 ],
               );

@@ -4,8 +4,6 @@ import 'package:booking_app_internship_algoriza/features/hotels/data/model/facil
 import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';

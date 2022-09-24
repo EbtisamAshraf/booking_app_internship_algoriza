@@ -9,7 +9,7 @@ ThemeData appTheme() {
       fillColor:  MaterialStateProperty.all(Colors.black),
     ),
       primaryColor: AppColors.primaryColor,
-       scaffoldBackgroundColor: AppColors.backgroundColorLight,
+       scaffoldBackgroundColor: Colors.white,
       appBarTheme: const AppBarTheme(
 
         iconTheme: IconThemeData(color: Colors.black),
@@ -19,16 +19,12 @@ ThemeData appTheme() {
           titleTextStyle: TextStyle(color: Colors.black , fontSize: 25,fontWeight: FontWeight.bold)),
       textTheme: const TextTheme(
       bodyLarge: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
-      displaySmall:  TextStyle(fontSize: 16, color: Colors.black),
+      displaySmall:  TextStyle(fontSize: 16, color: Colors.grey),
       bodySmall: TextStyle(fontSize: 16, color: Colors.black),
-      displayMedium: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold,color: Colors.black),
+      displayMedium: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),
       headlineLarge:  TextStyle(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),
-        headlineSmall: TextStyle(fontSize: 18,color:  Colors.black,fontWeight: FontWeight.bold),
       ),
-cardColor: const Color(0xFFFFFFFF),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: AppColors.backgroundColorLight,
-    )
+
 
   );
 
@@ -41,7 +37,7 @@ ThemeData appDarkTheme() {
 
     ),
     primaryColor: AppColors.primaryColor,
-    scaffoldBackgroundColor: Color(0xFF1A1A1A),
+    scaffoldBackgroundColor: Colors.black38,
     appBarTheme: const AppBarTheme(
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
@@ -52,16 +48,7 @@ ThemeData appDarkTheme() {
         bodyLarge: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
         displaySmall:  TextStyle(fontSize: 16,color: Colors.white,),
         displayMedium: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold,color: Colors.white,),
-        headlineLarge:  TextStyle(fontSize: 22,color: Colors.white,),
-      headlineSmall: TextStyle(fontSize: 18,color:  Colors.white,fontWeight: FontWeight.bold),
-      bodySmall: TextStyle(fontSize: 16, color: Colors.white),
-
-    ),
-
-    cardColor: Color(0xFF2C2C2C),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: AppColors.backgroundColorDark,
-      )
+        headlineLarge:  TextStyle(fontSize: 30,color: Colors.white,),),
 
 
   );

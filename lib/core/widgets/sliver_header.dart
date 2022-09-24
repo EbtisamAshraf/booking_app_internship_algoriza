@@ -1,5 +1,5 @@
 import 'package:booking_app_internship_algoriza/core/utils/media_query_values.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

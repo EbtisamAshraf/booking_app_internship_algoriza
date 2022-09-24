@@ -11,7 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../../../core/widgets/text_form_field.dart';
 
 class RegisterScreen extends StatefulWidget {

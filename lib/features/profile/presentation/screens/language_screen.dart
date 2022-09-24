@@ -18,7 +18,7 @@ class LanguageScreen extends StatelessWidget {
     // final  translationCubit = BlocProvider.of<AppCubit>(context);
     return Scaffold(
      appBar: AppBar(
-         title: Text('language',style: Theme.of(context).textTheme.titleLarge)),
+         title: Text('language'.tr(),style: Theme.of(context).textTheme.titleLarge)),
      body: Padding(
        padding: const EdgeInsets.all(20.0),
        child:Column(
@@ -45,7 +45,7 @@ class LanguageScreen extends StatelessWidget {
            Container(
                margin: const EdgeInsets.symmetric(vertical: 10.0 , horizontal: 30),
                width: MediaQuery.of(context).size.width *0.6,
-               child: ElevatedButton(child:  const Text('change Language'),onPressed: (){
+               child: ElevatedButton(child:   Text('Change Language'.tr()),onPressed: (){
                  context.setLocale(AppCubit.get(context).locale);
                })),
          ],
