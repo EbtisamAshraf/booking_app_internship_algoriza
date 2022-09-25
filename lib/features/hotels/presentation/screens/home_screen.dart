@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          di.sl<HotelsCubit>()..getHotels(exploreHotel: ExploreHotel(page: 1)),
+          di.sl<HotelsCubit>()..getHotels(exploreHotel: ExploreHotel(page: 1,)),
       child: Scaffold(
           body: BlocConsumer<HotelsCubit, HotelStates>(
               listener: (context, state) {},
