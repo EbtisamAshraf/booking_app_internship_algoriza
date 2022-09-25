@@ -62,8 +62,8 @@ class _MapScreenState extends State<MapScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
           return Container(
-            height: height * 0.1,
-            width: double.infinity,
+            height: height * 0.2,
+            padding: EdgeInsets.all(height * 0.02),
             child: PageView.builder(
                 controller: controller,
                 scrollDirection: Axis.horizontal,
@@ -198,7 +198,7 @@ class _MapScreenState extends State<MapScreen> {
       ),
       body: Stack(
         alignment: Alignment.bottomLeft,
-        fit: StackFit.expand,
+        fit: StackFit.passthrough,
         children: [
           position != null
               ? buildMap()

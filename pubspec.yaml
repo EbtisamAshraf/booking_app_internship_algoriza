@@ -35,13 +35,10 @@ dependencies:
 
 dev_dependencies:
   auto_divider: ^1.0.0
-  cached_network_image: ^3.2.1
-  carousel_slider: ^4.1.1
   flutter_lints: ^2.0.0
   flutter_rating_bar: ^4.0.1
   flutter_test:
     sdk: flutter
-  font_awesome_flutter: ^10.2.1
   geolocator: ^9.0.1
   google_maps_flutter: ^2.2.0
   material_floating_search_bar: ^0.3.7

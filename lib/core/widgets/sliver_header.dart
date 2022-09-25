@@ -1,3 +1,4 @@
+import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/utils/media_query_values.dart';
  import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +108,9 @@ class SliverHeader implements SliverPersistentHeaderDelegate {
             padding: const EdgeInsets.only(top: 340, left: 12),
             child: Row(
               children: [
-                DefaultButton(text: 'View Hotel', onClick: () {}),
+                DefaultButton(text: 'View Hotel', onClick: () {
+                   Navigator.of(context).pushNamed(Routes.exploreScreen);
+                }),
                 const Spacer(),
                 // SmoothPageIndicator(
                 //   controller: pageController,
