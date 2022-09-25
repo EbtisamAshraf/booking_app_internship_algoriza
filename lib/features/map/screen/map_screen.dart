@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:typed_data';
 
+import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_loading_widget.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_search_form.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/hotel_explore_item.dart';
@@ -10,11 +12,13 @@ import 'package:booking_app_internship_algoriza/features/hotels/presentation/cub
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
 import 'package:booking_app_internship_algoriza/features/map/data/location_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:ui' as ui;
 import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 
 class MapScreen extends StatefulWidget {
@@ -25,60 +29,132 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  List<DataHotels>? dataHotels;
+  HotelsModel? dataHotelsModel;
   final controller = PageController();
   static Position? position;
+  late CameraPosition cameraPosition;
   Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> markers = Set();
+  Uint8List? mapMarker;
 
-  static final CameraPosition _cameraPosition = CameraPosition(
-    bearing: 0.0,
-    target: LatLng(position!.latitude, position!.longitude),
-    tilt: 0.0,
-    zoom: 17,
-  );
+  CameraPosition buildCameraPosition(HotelsModel hotelsModel) {
+    for (int i = 0; i <= dataHotelsModel!.data!.data!.length - 1; i++) {
+      cameraPosition = CameraPosition(
+        bearing: 0.0,
+        target: LatLng(
+            double.parse(hotelsModel.data!.data![i].latitude.toString()),
+            double.parse(hotelsModel.data!.data![i].longitude.toString())),
+        tilt: 0.0,
+        zoom: 13,
+      );
+    }
+    return cameraPosition;
+  }
 
-  Future<void> getCurrentLocation() async {
-    await LocationHelper.getCurrentLocation();
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
+  }
 
-    position = await Geolocator.getLastKnownPosition().whenComplete(() {
-      setState(() {});
-    });
+  getMarkIcon() async {
+    mapMarker = await getBytesFromAsset('assets/images/hotel-icon.png', 100);
+  }
+
+  Set<Marker> buildMarkers(HotelsModel dataHotelsModel) {
+    for (int i = 0; i <= dataHotelsModel.data!.data!.length - 1; i++) {
+      markers.add(Marker(
+        markerId: MarkerId('$i'),
+        icon: BitmapDescriptor.fromBytes(mapMarker!),
+        position: LatLng(
+            double.parse(dataHotelsModel.data!.data![i].latitude.toString()),
+            double.parse(dataHotelsModel.data!.data![i].longitude.toString())),
+        infoWindow: InfoWindow(
+          title: dataHotelsModel.data!.data![i].name,
+          snippet:" ${dataHotelsModel.data!.data![i].price} EPG",
+        ),
+      ));
+    }
+    return markers;
   }
 
   Widget buildMap() {
-    return GoogleMap(
-      mapType: MapType.normal,
-      myLocationEnabled: true,
-      zoomControlsEnabled: false,
-      myLocationButtonEnabled: false,
-      initialCameraPosition: _cameraPosition,
-      onMapCreated: (GoogleMapController controller) {
-        _controller.complete(controller);
-      },
+    return BlocProvider(
+      create: (context) =>
+          di.sl<HotelsCubit>()..getHotels(exploreHotel: ExploreHotel(page: 1)),
+      child: BlocBuilder<HotelsCubit, HotelStates>(
+        builder: (context, state) {
+          if (state is HotelsLoadingState) {
+            return const CustomLoadingWidget();
+          }
+          if (state is HotelsLoadedState) {
+            dataHotelsModel = state.hotelsModel;
+            return GoogleMap(
+              markers: buildMarkers(dataHotelsModel!),
+              mapType: MapType.normal,
+              myLocationEnabled: true,
+              zoomControlsEnabled: false,
+              myLocationButtonEnabled: false,
+              initialCameraPosition: buildCameraPosition(dataHotelsModel!),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+            );
+          }
+          return Container(
+            color: Colors.amber,
+          );
+        },
+      ),
     );
   }
 
   Widget buildPageView() {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    return BlocProvider(
+      create: (context) =>
+          di.sl<HotelsCubit>()..getHotels(exploreHotel: ExploreHotel(page: 1)),
+      child: BlocBuilder<HotelsCubit, HotelStates>(
+        builder: (context, state) {
+          if (state is HotelsLoadingState) {
+            return const CustomLoadingWidget();
+          }
+          if (state is HotelsLoadedState) {
+            dataHotelsModel = state.hotelsModel;
+            return Container(
+              height: height * 0.2,
+              padding: EdgeInsets.all(height * 0.02),
+              child: PageView.builder(
+                  controller: controller,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: dataHotelsModel!.data!.data!.length,
+                  itemBuilder: (context, index) {
+                    return HotelHomeItem(
+                      dataHotels: dataHotelsModel!.data!.data![index],
+                      index: index,
+                    );
+                  }),
+            );
+          }
           return Container(
-            height: height * 0.1,
-            width: double.infinity,
-            child: PageView.builder(
-                controller: controller,
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return HotelHomeItem();
-                }),
+            color: Colors.red,
           );
-        }
+        },
+      ),
+    );
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getCurrentLocation();
+    buildMap();
+    getMarkIcon();
   }
 
   @override
@@ -91,7 +167,13 @@ class _MapScreenState extends State<MapScreen> {
           'Explore',
           style: Theme.of(context).appBarTheme.titleTextStyle,
         ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.sort_rounded))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(Routes.exploreScreen);
+              },
+              icon: Icon(Icons.sort_rounded))
+        ],
         leading: const Icon(Icons.arrow_back, color: Colors.black, size: 30),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(height * 0.35),
@@ -198,15 +280,9 @@ class _MapScreenState extends State<MapScreen> {
       ),
       body: Stack(
         alignment: Alignment.bottomLeft,
-        fit: StackFit.expand,
+        fit: StackFit.passthrough,
         children: [
-          position != null
-              ? buildMap()
-              : const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.blue,
-                  ),
-                ),
+          buildMap(),
           buildPageView(),
         ],
       ),

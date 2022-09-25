@@ -1,3 +1,4 @@
+import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/utils/media_query_values.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/sliver_header.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/explore_use_cases.dart';
@@ -18,214 +19,226 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      di.sl<HotelsCubit>()..getHotels(exploreHotel: ExploreHotel(page: 1)),
+          di.sl<HotelsCubit>()..getHotels(exploreHotel: ExploreHotel(page: 1,)),
       child: Scaffold(
           body: BlocConsumer<HotelsCubit, HotelStates>(
               listener: (context, state) {},
               builder: (context, state) => state is HotelsLoadingState
                   ? const Center(child: CustomLoadingWidget())
                   : state is HotelsLoadedState
-                  ? CustomScrollView(
-                slivers: [
-                  SliverPersistentHeader(
-                      pinned: true,
-                      floating: true,
-                      delegate: SliverHeader(
-                          minExtension: 240,
-                          maxExtension: context.hight / 1.7)),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding:
-                      const EdgeInsets.only(left: 20.0, top: 10),
-                      child: Row(
-                        children: [
-                          Text('Best Deals',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineLarge),
-                          const Spacer(),
-                          TextButton(onPressed: (){}, child: Row(
-                            children: const [
-                              Text('View All',style: TextStyle(
-                                  color: AppColors.defaultColor,
-                                  fontWeight: FontWeight.bold),),
-                              Icon(Icons.arrow_forward,color: AppColors.defaultColor,)
-                            ],
-                          ))
-                        ],
-                      ),
-                    ),
-                  ),
-                  SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                              (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            HotelDetailsScreen(hotelDetails: state.hotelsModel.data!.data![index]),
-                                    ));
-                              },
+                      ? CustomScrollView(
+                          slivers: [
+                            SliverPersistentHeader(
+                                pinned: true,
+                                floating: true,
+                                delegate: SliverHeader(
+                                    minExtension: 240,
+                                    maxExtension: context.hight / 1.7)),
+                            SliverToBoxAdapter(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 10),
-                                child: Container(
-                                  height: 150,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(15)),
-                                    shadowColor: Color(0xFF6D6D6D).withOpacity(0.2),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        ClipRRect(
+                                padding:
+                                    const EdgeInsets.only(left: 20.0, top: 10),
+                                child: Row(
+                                  children: [
+                                    Text('Best Deals',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineLarge),
+                                    const Spacer(),
+                                    TextButton(
+                                        onPressed: () {
+                                        },
+                                        child: Row(
+                                          children: const [
+                                            Text(
+                                              'View All',
+                                              style: TextStyle(
+                                                  color: AppColors.defaultColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: AppColors.defaultColor,
+                                            )
+                                          ],
+                                        ))
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                    (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            HotelDetailsScreen(
+                                                hotelDetails: state.hotelsModel
+                                                    .data!.data![index]),
+                                      ));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0, vertical: 10),
+                                  child: Container(
+                                    height: 150,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Card(
+                                      shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          const BorderRadius.only(
-                                            topLeft: Radius.circular(15),
-                                            bottomLeft: Radius.circular(15),
-                                          ),
-                                          child:
-                                          CachedNetworkImage(
-                                            imageUrl:
-                                            'http://api.mahmoudtaha.com/images/${state.hotelsModel.data!.data![index].hotelImages!}',
-                                            width: 120,
-                                            height: 150,
-                                            placeholder: (context, url) =>
-                                            const Center(
-                                                child: CustomLoadingWidget()),
-                                            errorWidget: (context, url, error) =>
-                                                Image.asset(
-                                                  'assets/images/hotel5.png',
-                                                  width: 120,
-                                                  height: 150,
-                                                  fit: BoxFit.fitHeight,
-                                                ),
-                                          ),
-
-                                          //     Image.asset(
-                                          //   'assets/images/hotel.jpg',
-                                          //   width: 120,
-                                          //   height: 150,
-                                          //   fit: BoxFit.fitHeight,
-                                          // ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
+                                              BorderRadius.circular(15)),
+                                      shadowColor:
+                                          Color(0xFF6D6D6D).withOpacity(0.2),
+                                      child: Row(
+                                        crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                state.hotelsModel.data!
-                                                    .data![index].name!,
-                                                  style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                state.hotelsModel.data!
-                                                    .data![index].address!,
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: AppColors.hintColor,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 30,
-                                              ),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          '2.0 km to city',
-                                                          style: TextStyle(
-                                                            fontSize: 12,
-                                                            color: AppColors
-                                                                .hintColor,
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          'EGP ${state.hotelsModel.data!.data![index].price}',
-                                                          style: Theme.of(context)
-                                                              .textTheme
-                                                              .headlineSmall,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        RatingBarIndicator(
-                                                          rating: double
-                                                              .parse(state
-                                                              .hotelsModel
-                                                              .data!
-                                                              .data![
-                                                          index]
-                                                              .rate!),
-                                                          itemBuilder:
-                                                              (context,
-                                                              index) =>
-                                                          const Icon(
-                                                            Icons.star,
-                                                            color: AppColors
-                                                                .defaultColor,
-                                                          ),
-                                                          itemSize: 20.0,
-                                                          direction:
-                                                          Axis.horizontal,
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Text(
-                                                          ' ${state.hotelsModel.data!.data![index].rate!}  Rate',
-                                                          style: TextStyle(
-                                                              color: AppColors
-                                                                  .hintColor),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(15),
+                                              bottomLeft: Radius.circular(15),
+                                            ),
+                                            child:
+                                                // CachedNetworkImage(
+                                                //   imageUrl:
+                                                //   'http://api.mahmoudtaha.com/images/${state.hotelsModel.data!.data![index].hotelImages!}',
+                                                //   width: 120,
+                                                //   height: 150,
+                                                //   placeholder: (context, url) =>
+                                                //   const Center(
+                                                //       child: CustomLoadingWidget()),
+                                                //   errorWidget: (context, url, error) =>
+                                                //       Image.asset(
+                                                //         'assets/images/hotel5.png',
+                                                //         width: 120,
+                                                //         height: 150,
+                                                //         fit: BoxFit.fitHeight,
+                                                //       ),
+                                                // ),
+
+                                                Image.asset(
+                                              'assets/images/hotel.jpg',
+                                              width: 120,
+                                              height: 150,
+                                              fit: BoxFit.fitHeight,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                    state.hotelsModel.data!
+                                                        .data![index].name!,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headlineSmall),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  state.hotelsModel.data!
+                                                      .data![index].address!,
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: AppColors.hintColor,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 30,
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            '2.0 km to city',
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              color: AppColors
+                                                                  .hintColor,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text(
+                                                            'EGP ${state.hotelsModel.data!.data![index].price}',
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .headlineSmall,
+                                                          )
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          RatingBarIndicator(
+                                                            rating: double
+                                                                .parse(state
+                                                                    .hotelsModel
+                                                                    .data!
+                                                                    .data![
+                                                                        index]
+                                                                    .rate!),
+                                                            itemBuilder:
+                                                                (context,
+                                                                        index) =>
+                                                                    const Icon(
+                                                              Icons.star,
+                                                              color: AppColors
+                                                                  .defaultColor,
+                                                            ),
+                                                            itemSize: 20.0,
+                                                            direction:
+                                                                Axis.horizontal,
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            ' ${state.hotelsModel.data!.data![index].rate!}  Rate',
+                                                            style: TextStyle(
+                                                                color: AppColors
+                                                                    .hintColor),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                          childCount:
-                          state.hotelsModel.data!.data!.length)),
-                ],
-              )
-                  : const Center(child: CustomLoadingWidget()))),
+                              );
+                            },
+                                    childCount:
+                                        state.hotelsModel.data!.data!.length)),
+                          ],
+                        )
+                      : const Center(child: CustomLoadingWidget()))),
     );
   }
 }
