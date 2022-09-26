@@ -2,7 +2,6 @@ import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/login_screen.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/register_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
-import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/filtter_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/home_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/main_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
@@ -28,7 +27,6 @@ class Routes {
   static const String onBoardingRoute = "/OnBoarding";
   static const String splashScreen = "/SplashScreen";
   static const String languageScreen = "/languageScreen";
-  static const String filterScreen = "/filterScreen";
 }
 
 class RouteGenerator {
@@ -63,9 +61,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SettingScreen());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
-      case Routes.splashScreen:
-        return MaterialPageRoute(builder: (_) => SplashScreen());
-      case Routes.filterScreen: return MaterialPageRoute(builder: (_) => FilterScreen());
+      case Routes.splashScreen:         return MaterialPageRoute(builder: (_) => SplashScreen());
       case Routes.languageScreen:
         return MaterialPageRoute(builder: (_) => LanguageScreen());
       default:

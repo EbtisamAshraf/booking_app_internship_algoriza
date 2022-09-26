@@ -1,5 +1,6 @@
 import 'package:booking_app_internship_algoriza/config/themes/app_theme.dart';
 import 'package:booking_app_internship_algoriza/core/utils/app_colors.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -8,7 +9,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
 class HotelExploreItem extends StatelessWidget {
-  const HotelExploreItem({Key? key}) : super(key: key);
+  const HotelExploreItem({Key? key, required this.dataHotels}) : super(key: key);
+
+  final DataHotels dataHotels;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +35,8 @@ class HotelExploreItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Grand Royal Hotel',style: Theme.of(context).textTheme.bodyLarge,),
-                  Text("\$180", style: Theme.of(context).textTheme.bodyLarge,)
+                  Text(dataHotels.name.toString(),style: Theme.of(context).textTheme.bodyLarge,),
+                  Text("${dataHotels.price.toString()} EGP", style: Theme.of(context).textTheme.bodyLarge,)
                 ],
               ),
             ),
@@ -42,7 +45,7 @@ class HotelExploreItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('location of hotel',style: Theme.of(context).textTheme.displaySmall,),
+                  Text(dataHotels.address.toString(),style: Theme.of(context).textTheme.displaySmall,),
                   Text("/per night", style: Theme.of(context).textTheme.displaySmall,),
                 ],
               ),
@@ -50,7 +53,7 @@ class HotelExploreItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: height * 0.05,right: height * 0.01,bottom: height * 0.02),
               child: RatingBarIndicator(
-              rating: 4,
+              rating: double.parse(dataHotels.rate.toString()),
                                         itemBuilder: (context, index) =>
                                             const Icon(
                                           Icons.star,

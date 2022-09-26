@@ -14,7 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^4.0.6
-  easy_localization: 
+  easy_localization: null
   equatable: ^2.0.3
   flutter:
     sdk: flutter
@@ -25,10 +25,13 @@ dependencies:
   get_it: ^7.2.0
   internet_connection_checker: ^0.0.1+4
   shared_preferences: ^2.0.15
+
+
   smooth_page_indicator:
   font_awesome_flutter:
   cached_network_image:
   carousel_slider:
+
 
 dev_dependencies:
   auto_divider: ^1.0.0
@@ -36,6 +39,9 @@ dev_dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_test:
     sdk: flutter
+  geolocator: ^9.0.1
+  google_maps_flutter: ^2.2.0
+  material_floating_search_bar: ^0.3.7
 
 flutter:
 

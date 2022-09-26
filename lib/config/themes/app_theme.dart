@@ -14,7 +14,6 @@ ThemeData appTheme() {
       backgroundColor: Colors.white,
 
     ),
-      sliderTheme: const SliderThemeData(valueIndicatorTextStyle: TextStyle(fontSize: 16,color: Colors.black),valueIndicatorColor: Colors.transparent),
       appBarTheme: const AppBarTheme(
 
         iconTheme: IconThemeData(color: Colors.black),
@@ -45,7 +44,7 @@ ThemeData appDarkTheme() {
       backgroundColor: Colors.black,
 
     ),
-    sliderTheme: const SliderThemeData(valueIndicatorTextStyle: TextStyle(fontSize: 16,color: Colors.white),valueIndicatorColor: Colors.transparent),
+
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: Colors.black38,
     appBarTheme: const AppBarTheme(

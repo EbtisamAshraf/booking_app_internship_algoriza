@@ -12,6 +12,12 @@ class HotelsLoadedState extends HotelStates {
   HotelsLoadedState({required this.hotelsModel});
 }
 
+class HotelsDataState extends HotelStates {
+  final List<DataHotels> dataHotels;
+
+  HotelsDataState(this.dataHotels);
+}
+
 class GetHotelsErrorState extends HotelStates {
   final String error;
   GetHotelsErrorState(this.error);

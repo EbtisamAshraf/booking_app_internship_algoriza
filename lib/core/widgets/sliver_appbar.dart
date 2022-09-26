@@ -66,7 +66,7 @@ class SliverAppbar extends StatelessWidget {
             children: [
               Text('200  Hotel found',style: Theme.of(context).textTheme.displaySmall,),
               TextButton.icon(onPressed: (){}, 
-              icon: const Icon(Icons.filter_list,color: Colors.teal,), 
+              icon: const Icon(Icons.sort_rounded,color: Colors.teal,), 
               label: Text('Filter',style: Theme.of(context).textTheme.bodyMedium,)),
             ],
           ),

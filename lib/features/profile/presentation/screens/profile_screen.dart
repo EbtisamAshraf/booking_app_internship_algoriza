@@ -1,4 +1,5 @@
 import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
+import 'package:booking_app_internship_algoriza/core/utils/app_colors.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_loading_widget.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/cubit/profile_cubit.dart';
@@ -44,9 +45,7 @@ class ProfileScreen extends StatelessWidget {
                                         .textTheme
                                         .displayMedium),
                                 Text('View and Edit profile'.tr(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displaySmall),
+                                  style: TextStyle(color: AppColors.hintColor,fontSize: 16),)
                               ],
                             ),
                             CircleAvatar(
