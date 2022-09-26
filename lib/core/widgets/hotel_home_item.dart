@@ -12,11 +12,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 
 class HotelHomeItem extends StatelessWidget {
- const HotelHomeItem({Key? key, required this.dataHotels, required this.index}) : super(key: key);
+ const HotelHomeItem({Key? key, required this.dataHotels}) : super(key: key);
 
   // List<DataHotels>? dataHotels;
   final DataHotels dataHotels;
-  final int index;
 
   @override
   Widget build(BuildContext context) {
