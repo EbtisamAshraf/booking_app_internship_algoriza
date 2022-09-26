@@ -8,5 +8,6 @@ class EndPoints {
   static const String updateInfo = 'auth/update-info';
   static const String passChange = 'auth/pass-change';
   static const String hotels = '/hotels';
+  static const String search = '/search-hotels';
 
 }

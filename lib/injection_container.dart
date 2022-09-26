@@ -10,6 +10,7 @@ import 'package:booking_app_internship_algoriza/features/authentication/domain/u
 import 'package:booking_app_internship_algoriza/features/authentication/domain/use_cases/register_user.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/cubit/login_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/cubit/register_cubit.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/search.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/data_sources/profile_remote_data_source.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/repositories/profile_repository_impl.dart';
@@ -32,9 +33,10 @@ final sl = GetIt.instance;
 Future<void> init() async {
   ///feature hotel
   //bloc
-  sl.registerFactory(() => HotelsCubit( exploreUseCase: sl()));
+  sl.registerFactory(() => HotelsCubit( exploreUseCase: sl(),searchUseCase: sl()));
   //use case
   sl.registerLazySingleton(() => ExploreUseCase(sl()));
+  sl.registerLazySingleton(() => SearchUseCase(sl()));
   //Repository
   sl.registerLazySingleton<ExploreRepository>(() => ExploreRepositoryImpl(
       networkInfo: sl(),

@@ -51,9 +51,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           } else if (state is RegisterLoadedState) {
             Constants.showToast(
                 clr: Colors.green,
-                msg: state.registerModel.status.title!.ar == null
+                msg: state.registerModel.status.title!.en == null
                     ? state.registerModel.status.title.toString()
-                    : state.registerModel.status.title!.ar.toString());
+                    : state.registerModel.status.title!.en.toString());
             Navigator.pushNamedAndRemoveUntil(
                 context, Routes.init, (route) => false);
           }

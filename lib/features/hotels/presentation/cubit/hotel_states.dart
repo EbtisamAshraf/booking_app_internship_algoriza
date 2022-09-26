@@ -16,3 +16,16 @@ class GetHotelsErrorState extends HotelStates {
   final String error;
   GetHotelsErrorState(this.error);
 }
+
+class SearchHotelsLoadingState extends HotelStates {}
+
+class SearchHotelsLoadedState extends HotelStates {
+  final HotelsModel hotelsModel;
+
+  SearchHotelsLoadedState({required this.hotelsModel});
+}
+
+class SearchHotelsErrorState extends HotelStates {
+  final String error;
+  SearchHotelsErrorState(this.error);
+}
