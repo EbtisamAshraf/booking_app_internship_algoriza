@@ -10,6 +10,7 @@ import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotel
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/explore_use_cases.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/hotel_details.dart';
 import 'package:booking_app_internship_algoriza/features/map/data/location_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -134,9 +135,17 @@ class _MapScreenState extends State<MapScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: dataHotelsModel!.data!.data!.length,
                   itemBuilder: (context, index) {
-                    return HotelHomeItem(
-                      dataHotels: dataHotelsModel!.data!.data![index],
-                      index: index,
+                    return InkWell(
+                      onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => HotelDetailsScreen(
+                                    hotelDetails:
+                                        dataHotelsModel!.data!.data![index]),
+                              ));
+                            },
+                      child: HotelHomeItem(
+                        dataHotels: dataHotelsModel!.data!.data![index],
+                      ),
                     );
                   }),
             );
