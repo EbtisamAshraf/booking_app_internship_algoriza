@@ -10,5 +10,8 @@ class EndPoints {
   static const String hotels = '/hotels';
   static const String search = '/search-hotels';
   static const String getFacilities = '/facilities';
+  static const String getBooking = '/get-bookings';
+  static const String createBooking = '/create-booking';
+  static const String updateBooking = '/update-booking-status';
 
 }

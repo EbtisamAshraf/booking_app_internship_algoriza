@@ -10,6 +10,13 @@ import 'package:booking_app_internship_algoriza/features/authentication/domain/u
 import 'package:booking_app_internship_algoriza/features/authentication/domain/use_cases/register_user.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/cubit/login_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/cubit/register_cubit.dart';
+import 'package:booking_app_internship_algoriza/features/booking/data/data_sources/booking_remote_data_sources.dart';
+import 'package:booking_app_internship_algoriza/features/booking/data/repositories/booking_repository_impl.dart';
+import 'package:booking_app_internship_algoriza/features/booking/domain/repositories/booking_repository.dart';
+import 'package:booking_app_internship_algoriza/features/booking/domain/use_case/create_booking.dart';
+import 'package:booking_app_internship_algoriza/features/booking/domain/use_case/get_booking.dart';
+import 'package:booking_app_internship_algoriza/features/booking/domain/use_case/update_booking.dart';
+import 'package:booking_app_internship_algoriza/features/booking/presentation/cubit/booking_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/get_facilities.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/search.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
@@ -32,7 +39,7 @@ import 'features/hotels/domain/use_cases/explore_use_cases.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  ///feature hotel
+  ///feature --------------- hotel ---------------
   //bloc
   sl.registerFactory(() => HotelsCubit(getFacilitiesUseCase: sl(), exploreUseCase: sl(),searchUseCase: sl()));
   //use case
@@ -47,7 +54,7 @@ Future<void> init() async {
   sl.registerLazySingleton<ExploreRemoteDataSource>(
           () => ExploreRemoteDataSourceImpl(apiConsumer: sl()));
 
-  ///feature profile
+  ///feature --------------- profile ---------------
   //bloc
   sl.registerFactory(() => ProfileCubit( getProfileInfoUseCase: sl() , updateInfoUseCase: sl()));
 
@@ -65,7 +72,7 @@ Future<void> init() async {
   sl.registerLazySingleton<ProfileRemoteDataSource>(
           () => ProfileRemoteDataSourceImpl(apiConsumer: sl()));
 
-  ///feature auth
+  ///feature --------------- auth ---------------
   //bloc
   sl.registerFactory(() => LoginCubit(loginUserUseCase:sl()  ));
   sl.registerFactory(() => RegisterCubit(registerUserUseCase:sl()  ));
@@ -83,13 +90,37 @@ Future<void> init() async {
   sl.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(apiConsumer: sl()));
 
+
+  ///feature --------------- Booking ---------------
+  //bloc
+  sl.registerFactory(() => BookingCubit(
+   createBookingUseCase: sl() ,
+   getBookingUseCase: sl(),
+   updateBookingUseCase:sl() ));
+
+
+  // use case
+  sl.registerLazySingleton(() => CreateBookingUseCase(sl()));
+  sl.registerLazySingleton(() => GetBookingUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateBookingUseCase(sl()));
+  //  //Repository
+
+  sl.registerLazySingleton<BookingRepository>(() => BookingRepositoryImpl(
+      networkInfo: sl(),
+      bookingRemoteDataSources: sl(),
+      ));
+
+  //  // data source
+  sl.registerLazySingleton<BookingRemoteDataSources>(
+          () => BookingRemoteDataSourcesImpl(apiConsumer: sl()));
+
+  /// ---------------------------------------------------------------------------
   // core
-  sl.registerFactory(() => AppCubit( ));
-   sl.registerLazySingleton<NetworkInfo>(
-       () => NetworkInfoImpl(connectionChecker: sl()));
+    sl.registerFactory(() => AppCubit( ));
+     sl.registerLazySingleton<NetworkInfo>(
+         () => NetworkInfoImpl(connectionChecker: sl()));
 
-  sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: sl()));
-
+    sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: sl()));
   // external
 
   final sharedPreferences = await SharedPreferences.getInstance();
