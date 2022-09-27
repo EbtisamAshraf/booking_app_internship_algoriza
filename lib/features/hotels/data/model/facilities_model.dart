@@ -6,11 +6,11 @@ class FacilitiesModel {
 
   FacilitiesModel.fromJson(Map<String, dynamic> json) {
     status =
-    json['status'] != null ? new Status.fromJson(json['status']) : null;
+    json['status'] != null ?  Status.fromJson(json['status']) : null;
     if (json['data'] != null) {
       data = <FacilitiesData>[];
       json['data'].forEach((v) {
-        data!.add(new FacilitiesData.fromJson(v));
+        data!.add( FacilitiesData.fromJson(v));
       });
     }
   }

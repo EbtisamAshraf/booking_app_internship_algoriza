@@ -43,9 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
             } else if (state is LoginLoadedState) {
               Constants.showToast(
                   clr: Colors.green,
-                  msg: state.loginModel.status.title!.ar == null
+                  msg: state.loginModel.status.title!.en == null
                       ? state.loginModel.status.title.toString()
-                      : state.loginModel.status.title!.ar.toString());
+                      : state.loginModel.status.title!.en.toString());
               Navigator.pushNamedAndRemoveUntil(
                   context, Routes.init, (route) => false);
             }

@@ -1,10 +1,10 @@
 import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/login_screen.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/register_screen.dart';
-import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/filtter_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/home_screen.dart';
-import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/hotel_details.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/main_screen.dart';
 import 'package:booking_app_internship_algoriza/features/map/screen/map_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
@@ -16,6 +16,10 @@ import 'package:booking_app_internship_algoriza/features/splash/presentation/scr
 import 'package:booking_app_internship_algoriza/features/splash/presentation/screens/splash_screen.dart';
 import 'package:booking_app_internship_algoriza/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
+
+
 
 class Routes {
   static const String init = '/';
@@ -27,11 +31,11 @@ class Routes {
   static const String settingScreenRoute = "/setting";
   static const String exploreScreen = '/explore_screen';
   static const String homeScreen = '/home_screen';
-  static const String mapScreen = '/map_screen';
   static const String onBoardingRoute = "/OnBoarding";
   static const String splashScreen = "/SplashScreen";
   static const String languageScreen = "/languageScreen";
-  static const String hotelDetailsScreen = '/hotel_details';
+  static const String mapScreen = "/mapScreen";
+  static const String filterScreen = "/filterScreen";
 }
 
 class RouteGenerator {
@@ -52,7 +56,8 @@ class RouteGenerator {
       case Routes.editProfileScreenRoute:
         ProfileInfoModel profileInfo = settings.arguments as ProfileInfoModel;
         return MaterialPageRoute(
-            builder: (_) => EditProfileScreen(
+            builder: (_) =>
+                EditProfileScreen(
                   profileInfo: profileInfo,
                 ));
 
@@ -60,13 +65,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HomeScreen());
 
       case Routes.exploreScreen:
-        return MaterialPageRoute(builder: (_) => ExploreScreen());
-
-      case Routes.hotelDetailsScreen:
-        return MaterialPageRoute(builder: (_) => HotelDetailsScreen(hotelDetails: DataHotels(),));
-
-      case Routes.mapScreen:
-        return MaterialPageRoute(builder: (_) => const MapScreen());
+        return MaterialPageRoute(builder: (_) =>
+            BlocProvider(
+              create: (context) => di.sl<HotelsCubit>(),
+              child: ExploreScreen(),
+            ));
 
       case Routes.settingScreenRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
@@ -74,6 +77,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
       case Routes.splashScreen:
         return MaterialPageRoute(builder: (_) => SplashScreen());
+      case Routes.filterScreen:
+        return MaterialPageRoute(builder: (_) => FilterScreen());
+      case Routes.mapScreen:
+        return MaterialPageRoute(builder: (_) => MapScreen());
       case Routes.languageScreen:
         return MaterialPageRoute(builder: (_) => LanguageScreen());
       default:
@@ -83,7 +90,8 @@ class RouteGenerator {
 
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
-        builder: (_) => Scaffold(
+        builder: (_) =>
+            Scaffold(
               appBar: AppBar(
                 title: const Text(AppStrings.noRouteFound),
               ),

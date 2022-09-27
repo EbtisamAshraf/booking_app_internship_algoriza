@@ -15,4 +15,5 @@ class AppStrings {
   static const String updateSuccessMsg = 'update done successfully';
   static String token = '';
   static const String googleAPIkey = 'AIzaSyCN828Wz_h3jxGA7ZMORH3YQMxBec8njuA';
+  static bool isFilter = false;
 }
