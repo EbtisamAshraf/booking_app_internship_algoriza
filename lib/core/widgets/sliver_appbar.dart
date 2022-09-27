@@ -1,3 +1,4 @@
+import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_search_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +6,9 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class SliverAppbar extends StatelessWidget {
-  const SliverAppbar({Key? key}) : super(key: key);
-
+  const SliverAppbar({Key? key, this.onPressedSearch, required this.searchForm}) : super(key: key);
+  final VoidCallback? onPressedSearch;
+  final Widget searchForm;
   @override
   Widget build(BuildContext context) {
      double height = MediaQuery.of(context).size.height;
@@ -19,7 +21,7 @@ class SliverAppbar extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-            const Expanded(child: CustomSearchForm(hint: 'Egypt.......')),
+             Expanded(child: searchForm), //CustomSearchForm(hint: 'Egypt.......')
               Container(
                 height: height * 0.15,
                 width: width * 0.15,
@@ -27,7 +29,7 @@ class SliverAppbar extends StatelessWidget {
                  shape: BoxShape.circle, 
                  color: Colors.teal.shade300,
                 ),
-                child: IconButton(onPressed: (){}, icon:const Icon(Icons.search,size: 30,color: Colors.white,)),
+                child: IconButton(onPressed: onPressedSearch, icon:const Icon(Icons.search,size: 30,color: Colors.white,)),
               )
             ],
           ),
@@ -65,7 +67,9 @@ class SliverAppbar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('200  Hotel found',style: Theme.of(context).textTheme.displaySmall,),
-              TextButton.icon(onPressed: (){}, 
+              TextButton.icon(onPressed: (){
+                Navigator.pushNamed(context, Routes.filterScreen);
+              },
               icon: const Icon(Icons.sort_rounded,color: Colors.teal,), 
               label: Text('Filter',style: Theme.of(context).textTheme.bodyMedium,)),
             ],
