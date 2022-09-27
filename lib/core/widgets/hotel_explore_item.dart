@@ -11,7 +11,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class HotelExploreItem extends StatelessWidget {
   const HotelExploreItem({Key? key, required this.dataHotels}) : super(key: key);
 
-  final DataHotels dataHotels;
+  // final DataHotels dataHotels;
+ final dynamic dataHotels;
 
   @override
   Widget build(BuildContext context) {

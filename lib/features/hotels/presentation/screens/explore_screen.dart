@@ -1,28 +1,45 @@
 import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
+import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_loading_widget.dart';
+import 'package:booking_app_internship_algoriza/core/widgets/custom_search_form.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/hotel_explore_item.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/sliver_appbar.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/search_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/explore_use_cases.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/search.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/hotel_details.dart';
-import 'package:booking_app_internship_algoriza/features/splash/presentation/widgets/custom_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 
-class ExploreScreen extends StatelessWidget {
-  ExploreScreen({Key? key}) : super(key: key);
 
-  HotelsModel? dataHotelsModel;
+class ExploreScreen extends StatefulWidget {
+   const ExploreScreen({Key? key, }) : super(key: key);
 
+  @override
+  State<ExploreScreen> createState() => _ExploreScreenState();
+}
+
+class _ExploreScreenState extends State<ExploreScreen> {
+   HotelsModel? dataHotelsModel;
+
+@override
+  void initState() {
+  getHotels ();
+    super.initState();
+  }
+
+  getHotels ()async{
+    AppStrings.isFilter == false ?
+  await BlocProvider.of<HotelsCubit>(context).getHotels(exploreHotel:ExploreHotel(page: 1)): null;
+  }
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    final TextEditingController searchController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -53,23 +70,34 @@ class ExploreScreen extends StatelessWidget {
               pinned: true,
               automaticallyImplyLeading: false,
               expandedHeight: height * 0.35,
-              flexibleSpace: const FlexibleSpaceBar(
-                background: SliverAppbar(),
+              flexibleSpace: FlexibleSpaceBar(
+                background: BlocBuilder<HotelsCubit, HotelStates>(
+                  builder: (context, state) {
+                    return SliverAppbar(
+                      searchForm: CustomSearchForm(
+                        hint: 'Egypt.......',
+                        textController: searchController,
+                      ),
+                      onPressedSearch: () {
+                        debugPrint(searchController.text);
+                        HotelsCubit.get(context).search(
+                            searchParam:
+                                SearchParam(name: searchController.text));
+                      },
+                    );
+                  },
+                ),
               ),
             ),
             SliverList(
                 delegate: SliverChildListDelegate([
-              BlocProvider(
-                create: (context) => di.sl<HotelsCubit>()
-                  ..getHotels(exploreHotel: ExploreHotel(page: 1)),
-                child: BlocBuilder<HotelsCubit, HotelStates>(
-                  builder: (context, state) {
-                    if (state is HotelsLoadingState) {
-                      return const CustomLoadingWidget();
-                    }
-                    if (state is HotelsLoadedState) {
-                      dataHotelsModel = state.hotelsModel;
-                    }
+              BlocBuilder<HotelsCubit, HotelStates>(
+                builder: (context, state) {
+                  if (state is HotelsLoadingState || state is SearchHotelsLoadingState ) {
+                    return const CustomLoadingWidget();
+                  }
+                 else if (state is HotelsLoadedState  ) {
+                    dataHotelsModel = state.hotelsModel;
                     return ListView.builder(
                         shrinkWrap: true,
                         physics: const ClampingScrollPhysics(),
@@ -80,7 +108,7 @@ class ExploreScreen extends StatelessWidget {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => HotelDetailsScreen(
                                     hotelDetails:
-                                        dataHotelsModel!.data!.data![index]),
+                                    dataHotelsModel!.data!.data![index]),
                               ));
                             },
                             child: HotelExploreItem(
@@ -88,8 +116,29 @@ class ExploreScreen extends StatelessWidget {
                             ),
                           );
                         });
-                  },
-                ),
+                  } else if (state is SearchHotelsLoadedState) {
+                    SearchModel searchModel= state.searchModel;
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: searchModel.data.data!.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => HotelDetailsScreen(
+                                    hotelDetails:
+                                    searchModel.data.data![index]),
+                              ));
+                            },
+                            child: HotelExploreItem(
+                              dataHotels: searchModel.data.data![index],
+                            ),
+                          );
+                        });
+                  }
+                  return Text('');
+                },
               ),
             ]))
           ],
