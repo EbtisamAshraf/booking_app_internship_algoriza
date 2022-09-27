@@ -1,8 +1,10 @@
 import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/login_screen.dart';
 import 'package:booking_app_internship_algoriza/features/authentication/presentation/screens/register_screen.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/home_screen.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/hotel_details.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/main_screen.dart';
 import 'package:booking_app_internship_algoriza/features/map/screen/map_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
@@ -29,6 +31,7 @@ class Routes {
   static const String onBoardingRoute = "/OnBoarding";
   static const String splashScreen = "/SplashScreen";
   static const String languageScreen = "/languageScreen";
+  static const String hotelDetailsScreen = '/hotel_details';
 }
 
 class RouteGenerator {
@@ -57,7 +60,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HomeScreen());
 
       case Routes.exploreScreen:
-        return MaterialPageRoute(builder: (_) =>  ExploreScreen());
+        return MaterialPageRoute(builder: (_) => ExploreScreen());
+
+      case Routes.hotelDetailsScreen:
+        return MaterialPageRoute(builder: (_) => HotelDetailsScreen(hotelDetails: DataHotels(),));
 
       case Routes.mapScreen:
         return MaterialPageRoute(builder: (_) => const MapScreen());
@@ -66,7 +72,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SettingScreen());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
-      case Routes.splashScreen:         return MaterialPageRoute(builder: (_) => SplashScreen());
+      case Routes.splashScreen:
+        return MaterialPageRoute(builder: (_) => SplashScreen());
       case Routes.languageScreen:
         return MaterialPageRoute(builder: (_) => LanguageScreen());
       default:

@@ -1,12 +1,23 @@
 import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
+import 'package:booking_app_internship_algoriza/core/widgets/custom_loading_widget.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/hotel_explore_item.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/sliver_appbar.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/explore_use_cases.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/hotel_details.dart';
+import 'package:booking_app_internship_algoriza/features/splash/presentation/widgets/custom_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 
 class ExploreScreen extends StatelessWidget {
-  const ExploreScreen({Key? key}) : super(key: key);
+  ExploreScreen({Key? key}) : super(key: key);
+
+  HotelsModel? dataHotelsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +46,7 @@ class ExploreScreen extends StatelessWidget {
       ),
       body: Padding(
         padding:
-        EdgeInsets.fromLTRB(height * 0.01, 0, height * 0.01, height * 0),
+            EdgeInsets.fromLTRB(height * 0.01, 0, height * 0.01, height * 0),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -48,14 +59,39 @@ class ExploreScreen extends StatelessWidget {
             ),
             SliverList(
                 delegate: SliverChildListDelegate([
-                  ListView.builder(
-                      shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return HotelExploreItem();
-                      }),
-                ]))
+              BlocProvider(
+                create: (context) => di.sl<HotelsCubit>()
+                  ..getHotels(exploreHotel: ExploreHotel(page: 1)),
+                child: BlocBuilder<HotelsCubit, HotelStates>(
+                  builder: (context, state) {
+                    if (state is HotelsLoadingState) {
+                      return const CustomLoadingWidget();
+                    }
+                    if (state is HotelsLoadedState) {
+                      dataHotelsModel = state.hotelsModel;
+                    }
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: dataHotelsModel!.data!.data!.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => HotelDetailsScreen(
+                                    hotelDetails:
+                                        dataHotelsModel!.data!.data![index]),
+                              ));
+                            },
+                            child: HotelExploreItem(
+                              dataHotels: dataHotelsModel!.data!.data![index],
+                            ),
+                          );
+                        });
+                  },
+                ),
+              ),
+            ]))
           ],
         ),
       ),
