@@ -10,6 +10,8 @@ environment:
 
 dependencies:
   bloc: ^8.0.3
+  cached_network_image: null
+  carousel_slider: null
 
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
@@ -22,26 +24,29 @@ dependencies:
 
   flutter_spinkit: ^5.1.0
   fluttertoast: ^8.0.9
+  font_awesome_flutter: null
   get_it: ^7.2.0
   internet_connection_checker: ^0.0.1+4
   shared_preferences: ^2.0.15
 
-
-  smooth_page_indicator:
-  font_awesome_flutter:
-  cached_network_image:
-  carousel_slider:
-
+  smooth_page_indicator: null
 
 dev_dependencies:
   auto_divider: ^1.0.0
+  build_runner: ^2.2.1
   flutter_lints: ^2.0.0
   flutter_rating_bar: ^4.0.1
   flutter_test:
     sdk: flutter
+  freezed: ^2.1.1
+  freezed_annotation: ^2.1.0
   geolocator: ^9.0.1
   google_maps_flutter: ^2.2.0
+  json_annotation: ^4.7.0
+  json_serializable: ^6.4.0
   material_floating_search_bar: ^0.3.7
+  retrofit: ^3.0.1+1
+  retrofit_generator: ^4.1.0+1
 
 flutter:
 
