@@ -57,7 +57,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HomeScreen());
 
       case Routes.exploreScreen:
-        return MaterialPageRoute(builder: (_) => const ExploreScreen());
+        return MaterialPageRoute(builder: (_) =>  ExploreScreen());
 
       case Routes.mapScreen:
         return MaterialPageRoute(builder: (_) => const MapScreen());

@@ -28,7 +28,10 @@ ThemeData appTheme() {
       cardColor: const Color(0xFFFFFFFF),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.backgroundColorLight,
-      )
+      ),
+    dialogTheme: const DialogTheme(
+      backgroundColor: AppColors.backgroundColorLight
+    )
 
   );
 
@@ -49,6 +52,7 @@ ThemeData appDarkTheme() {
         elevation: 0.0,
         titleTextStyle: TextStyle(color: Colors.white , fontSize: 25,fontWeight: FontWeight.bold)),
     textTheme: const TextTheme(
+      titleLarge: TextStyle(color: Colors.white),
         bodyLarge: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
         displaySmall:  TextStyle(fontSize: 16,color: Colors.white,),
         displayMedium: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold,color: Colors.white,),
@@ -59,8 +63,11 @@ ThemeData appDarkTheme() {
     ),
 
       cardColor: Color(0xFF2C2C2C),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.backgroundColorDark,
+      ),
+      dialogTheme: const DialogTheme(
+          backgroundColor: AppColors.backgroundColorDark
       )
   );
 

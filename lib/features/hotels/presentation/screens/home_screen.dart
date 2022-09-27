@@ -5,6 +5,7 @@ import 'package:booking_app_internship_algoriza/features/hotels/presentation/cub
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/hotel_details.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -39,23 +40,24 @@ class HomeScreen extends StatelessWidget {
                       const EdgeInsets.only(left: 20.0, top: 10),
                       child: Row(
                         children: [
-                          Text('Best Deals',
+                          Text('Best Deals'.tr(),
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineLarge),
                           const Spacer(),
                           TextButton(onPressed: (){}, child: Row(
-                            children: const [
-                              Text('View All',style: TextStyle(
+                            children:  [
+                              Text('View all'.tr(),style: const TextStyle(
                                   color: AppColors.defaultColor,
                                   fontWeight: FontWeight.bold),),
-                              Icon(Icons.arrow_forward,color: AppColors.defaultColor,)
+                              const Icon(Icons.arrow_forward,color: AppColors.defaultColor,)
                             ],
                           ))
                         ],
                       ),
                     ),
                   ),
+
                   SliverList(
                       delegate: SliverChildBuilderDelegate(
                               (context, index) {
@@ -81,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                         BorderRadius.circular(15)),
-                                    shadowColor: Color(0xFF6D6D6D).withOpacity(0.2),
+                                    shadowColor: const Color(0xFF6D6D6D).withOpacity(0.2),
                                     child: Row(
                                       crossAxisAlignment:
                                       CrossAxisAlignment.start,
@@ -93,29 +95,29 @@ class HomeScreen extends StatelessWidget {
                                             bottomLeft: Radius.circular(15),
                                           ),
                                           child:
-                                          CachedNetworkImage(
-                                            imageUrl:
-                                            'http://api.mahmoudtaha.com/images/${state.hotelsModel.data!.data![index].hotelImages!}',
-                                            width: 120,
-                                            height: 150,
-                                            placeholder: (context, url) =>
-                                            const Center(
-                                                child: CustomLoadingWidget()),
-                                            errorWidget: (context, url, error) =>
-                                                Image.asset(
-                                                  'assets/images/hotel5.png',
-                                                  width: 120,
-                                                  height: 150,
-                                                  fit: BoxFit.fitHeight,
-                                                ),
-                                          ),
-
-                                          //     Image.asset(
-                                          //   'assets/images/hotel.jpg',
+                                          // CachedNetworkImage(
+                                          //   imageUrl:
+                                          //   '${state.hotelsModel.data!.data![index].hotelImages!}',
                                           //   width: 120,
                                           //   height: 150,
-                                          //   fit: BoxFit.fitHeight,
+                                          //   placeholder: (context, url) =>
+                                          //   const Center(
+                                          //       child: CustomLoadingWidget()),
+                                          //   errorWidget: (context, url, error) =>
+                                          //       Image.asset(
+                                          //         'assets/images/hotel5.png',
+                                          //         width: 120,
+                                          //         height: 150,
+                                          //         fit: BoxFit.fitHeight,
+                                          //       ),
                                           // ),
+
+                                              Image.asset(
+                                            'assets/images/hotel.jpg',
+                                            width: 120,
+                                            height: 150,
+                                            fit: BoxFit.fitHeight,
+                                          ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),

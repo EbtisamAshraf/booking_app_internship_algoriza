@@ -35,7 +35,7 @@ class ExploreScreen extends StatelessWidget {
       ),
       body: Padding(
         padding:
-            EdgeInsets.fromLTRB(height * 0.01, 0, height * 0.01, height * 0),
+        EdgeInsets.fromLTRB(height * 0.01, 0, height * 0.01, height * 0),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -48,14 +48,14 @@ class ExploreScreen extends StatelessWidget {
             ),
             SliverList(
                 delegate: SliverChildListDelegate([
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return HotelExploreItem();
-                  }),
-            ]))
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return HotelExploreItem();
+                      }),
+                ]))
           ],
         ),
       ),
