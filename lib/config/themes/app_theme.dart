@@ -10,10 +10,13 @@ ThemeData appTheme() {
     ),
       primaryColor: AppColors.primaryColor,
        scaffoldBackgroundColor: Colors.white,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
 
     ),
+      sliderTheme: const SliderThemeData(
+          valueIndicatorColor: Colors.transparent,
+          valueIndicatorTextStyle: TextStyle(color: Colors.black)),
       appBarTheme: const AppBarTheme(
 
         iconTheme: IconThemeData(color: Colors.black),
@@ -40,13 +43,16 @@ ThemeData appDarkTheme() {
       fillColor:  MaterialStateProperty.all(Colors.white),
 
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.black,
 
     ),
 
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: Colors.black38,
+    sliderTheme: const SliderThemeData(
+        valueIndicatorColor: Colors.transparent,
+        valueIndicatorTextStyle: TextStyle(color: Colors.white)),
     appBarTheme: const AppBarTheme(
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,

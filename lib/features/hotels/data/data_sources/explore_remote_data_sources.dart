@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:booking_app_internship_algoriza/core/api/api_consumer.dart';
 import 'package:booking_app_internship_algoriza/core/api/end_points.dart';
 import 'package:booking_app_internship_algoriza/core/error/exceptions.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/facilities_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/search_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/search.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +13,8 @@ import '../../domain/use_cases/explore_use_cases.dart';
 
 abstract class ExploreRemoteDataSource {
   Future<HotelsModel> getHotels({required ExploreHotel exploreHotel});
-  Future<HotelsModel> search({required SearchParam searchParam});
+  Future<SearchModel> search({required SearchParam searchParam});
+  Future <FacilitiesModel> getFacilities();
 }
 
 class ExploreRemoteDataSourceImpl implements ExploreRemoteDataSource {
@@ -37,7 +42,7 @@ class ExploreRemoteDataSourceImpl implements ExploreRemoteDataSource {
   }
 
   @override
-  Future<HotelsModel> search({required SearchParam searchParam}) async {
+  Future<SearchModel> search({required SearchParam searchParam}) async {
     final response = await apiConsumer.get(
       EndPoints.search,
       queryParameters: {
@@ -57,8 +62,21 @@ class ExploreRemoteDataSourceImpl implements ExploreRemoteDataSource {
       throw ServerException;
     });
     debugPrint('response = $response');
-    final HotelsModel hotelResponse = HotelsModel.fromJson(response);
+    final SearchModel hotelResponse = SearchModel.fromJson(response);
     debugPrint(hotelResponse.toString());
     return hotelResponse;
+  }
+
+  @override
+  Future<FacilitiesModel> getFacilities() async{
+    final response = await apiConsumer.get(
+      EndPoints.getFacilities,).onError((error, stackTrace) {
+      debugPrint('error = $error');
+      throw ServerException;
+    });
+    debugPrint('response = $response');
+    final FacilitiesModel facilitiesModel = FacilitiesModel.fromJson(response);
+    debugPrint(facilitiesModel.toString());
+    return facilitiesModel;
   }
 }

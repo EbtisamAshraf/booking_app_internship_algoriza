@@ -9,5 +9,6 @@ class EndPoints {
   static const String passChange = 'auth/pass-change';
   static const String hotels = '/hotels';
   static const String search = '/search-hotels';
+  static const String getFacilities = '/facilities';
 
 }

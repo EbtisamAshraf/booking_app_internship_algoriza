@@ -1,7 +1,9 @@
 import 'package:booking_app_internship_algoriza/core/error/exceptions.dart';
 import 'package:booking_app_internship_algoriza/core/error/failures.dart';
 import 'package:booking_app_internship_algoriza/core/network/network_info.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/facilities_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/search_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/explore_use_cases.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/search.dart';
 import 'package:dartz/dartz.dart';
@@ -36,12 +38,30 @@ class ExploreRepositoryImpl implements ExploreRepository {
   }
 
   @override
-  Future<Either<Failure, HotelsModel>> search({required SearchParam searchParam})async {
+  Future<Either<Failure, SearchModel>> search({required SearchParam searchParam})async {
     if (await networkInfo.isConnected) {
       try {
         final hotels =
             await exploreRemoteDataSource.search(searchParam: searchParam);
         return Right(hotels);
+      } on ServerException {
+        return Left(ServerFailure());
+      } catch (e) {
+        debugPrint(e.toString());
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, FacilitiesModel>> getFacilities() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final facilities =
+            await exploreRemoteDataSource.getFacilities();
+        return Right(facilities);
       } on ServerException {
         return Left(ServerFailure());
       } catch (e) {

@@ -1,19 +1,24 @@
 import 'package:booking_app_internship_algoriza/core/error/failures.dart';
 import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/facilities_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/data/model/hotels_model.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/search_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/explore_use_cases.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/get_facilities.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/search.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HotelsCubit extends Cubit<HotelStates> {
-  HotelsCubit({required this.searchUseCase,
+  HotelsCubit({required this.getFacilitiesUseCase, required this.searchUseCase,
     required this.exploreUseCase,
   }) : super(InitialState());
 
   final ExploreUseCase exploreUseCase;
   final SearchUseCase searchUseCase;
+  final GetFacilitiesUseCase getFacilitiesUseCase;
 
   static HotelsCubit get(context) => BlocProvider.of(context);
 
@@ -30,16 +35,57 @@ class HotelsCubit extends Cubit<HotelStates> {
       (data) => HotelsLoadedState(hotelsModel: data),
     ));
   }
+  List facilitiesList =[];
+  int? facilitiesInt;
+  List<bool> checkboxValueList =  [false,false,false,false,];
+  getCheckboxValueList(){
+    checkboxValueList.clear();
+    List.generate(facilitiesModel.data!.length, (index) =>  checkboxValueList.add(false));
+    debugPrint('checkboxValueList = $checkboxValueList');
+}
+  int checkboxIndex = 0;
+  changeCheckboxValue({required bool value, required int index}){
 
+    emit(InitialChangeCheckboxValueState());
+    checkboxValueList[index] = value;
+    if(value == true){
+      facilitiesInt =facilitiesModel.data![index].id! ;
+     // facilitiesList.add(facilitiesModel.data![index].id!);
+     //  debugPrint('facilitiesList = $facilitiesList');
+    }else{
+      facilitiesInt = null ;
+      // facilitiesList.remove(facilitiesModel.data![index].id!);
+      // debugPrint('facilitiesList = $facilitiesList');
+    }
+   emit(ChangeCheckboxValueState());
+
+    return checkboxValueList;
+  }
   search({required SearchParam searchParam}) async {
     emit(SearchHotelsLoadingState());
-    Either<Failure, HotelsModel> response =
+    Either<Failure, SearchModel> response =
     await searchUseCase(searchParam:searchParam );
     emit(response.fold(
           (failure) => SearchHotelsErrorState(
         AppStrings.serverFailureMsg,
       ),
-          (data) => SearchHotelsLoadedState(hotelsModel: data),
+          (data) => SearchHotelsLoadedState(searchModel:  data),
+    ));
+  }
+ late FacilitiesModel  facilitiesModel ;
+  getFacilities() async {
+    emit(FacilitiesLoadingState());
+    Either<Failure, FacilitiesModel> response =
+    await getFacilitiesUseCase();
+    emit(response.fold(
+          (failure) => FacilitiesErrorState(
+        AppStrings.serverFailureMsg,
+      ),
+          (data) {
+            facilitiesModel = data;
+            getCheckboxValueList();
+            return FacilitiesLoadedState(facilitiesModel:  data);
+          },
     ));
   }
 

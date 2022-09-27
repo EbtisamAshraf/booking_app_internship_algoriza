@@ -1,9 +1,14 @@
+import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
 import 'package:booking_app_internship_algoriza/core/utils/app_colors.dart';
+import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/core/utils/media_query_values.dart';
 import 'package:booking_app_internship_algoriza/core/widgets/custom_button.dart';
+import 'package:booking_app_internship_algoriza/core/widgets/custom_loading_widget.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/data/model/facilities_model.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/domain/use_cases/search.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/cubit/hotel_states.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +21,7 @@ class FilterScreen extends StatelessWidget {
     double currentSliderValue = 5;
     RangeValues currentRangeValues = const RangeValues(200, 700);
     return BlocProvider(
-      create: (context) => di.sl<HotelsCubit>(),
+      create: (context) => di.sl<HotelsCubit>()..getFacilities(),
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -67,23 +72,41 @@ class FilterScreen extends StatelessWidget {
                 child: Text('Facilities',
                     style: Theme.of(context).textTheme.displaySmall),
               ),
-              Expanded(
-                child: GridView.count(
-                  physics: BouncingScrollPhysics(),
-                  crossAxisCount: 2,
-                  padding: EdgeInsets.zero,
-                  childAspectRatio: 2 / 0.4,
-                  children: List.generate(
-                      5,
-                      (index) => SizedBox(
-                            child: Row(
-                              children: [
-                                Checkbox(value: false, onChanged: (value) {}),
-                                const Text('data')
-                              ],
-                            ),
-                          )),
-                ),
+              BlocBuilder<HotelsCubit, HotelStates>(
+                builder: (context, state) {
+                  if (state is FacilitiesLoadingState) {
+                    return const CustomLoadingWidget();
+                  } else if (state is FacilitiesLoadedState || state is InitialChangeCheckboxValueState|| state is ChangeCheckboxValueState) {
+                    // FacilitiesModel facilities = state.facilitiesModel;
+                    FacilitiesModel facilities = HotelsCubit.get(context).facilitiesModel;
+
+                    return Expanded(
+                      child: GridView.count(
+                        physics: const BouncingScrollPhysics(),
+                        crossAxisCount: 2,
+                        padding: EdgeInsets.zero,
+                        childAspectRatio: 2 / 0.4,
+                        children:[ ...List.generate(
+                            facilities.data!.length,
+                            (index) => SizedBox(
+                                  child: Row(
+                                    children: [
+                                      Checkbox(
+                                          value: HotelsCubit.get(context).checkboxValueList[index],
+                                          activeColor: AppColors.primaryColor,
+                                          onChanged: (bool? value) {
+                                            debugPrint('$value');
+                                            HotelsCubit.get(context).changeCheckboxValue(value: value!,index: index);
+                                          }),
+                                      Text(facilities.data![index].name!)
+                                    ],
+                                  ),
+                                ))],
+                      ),
+                    );
+                  }
+                  return Text('');
+                },
               ),
               const Divider(),
               Padding(
@@ -115,12 +138,15 @@ class FilterScreen extends StatelessWidget {
                   return customElevatedButton(
                       onPressed: () {
                         HotelsCubit.get(context).search(
-                            searchParam: SearchParam(
-                                // distance: currentSliderValue,
-                                // minPrice:currentRangeValues.start.round() ,
-                                // maxPrice: currentRangeValues.end.round(),
+                                searchParam: SearchParam(
+                                distance: currentSliderValue,
+                                minPrice:currentRangeValues.start.round() ,
+                                maxPrice: currentRangeValues.end.round(),
+                              facilities: HotelsCubit.get(context).facilitiesInt,
                                 count: 10,
                                 page: 1));
+                        AppStrings.isFilter == true;
+                         Navigator.pushNamed(context, Routes.exploreScreen,);
                       },
                       text: 'apply',
                       context: context);

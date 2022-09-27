@@ -27,8 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   nextScreen() async {
-    bool? isSkip =  false;
-    // bool? isSkip =  di.sl<SharedPreferences>().getBool('isSkip');
+   // bool? isSkip =  false;
+     bool? isSkip =  di.sl<SharedPreferences>().getBool('isSkip');
     AppStrings.token =  di.sl<SharedPreferences>().getString('token') ?? "";
 
     if (isSkip == true) {

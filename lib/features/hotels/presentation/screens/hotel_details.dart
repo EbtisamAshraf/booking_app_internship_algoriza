@@ -13,7 +13,7 @@ import '../../../../core/widgets/custom_loading_widget.dart';
 import '../../domain/use_cases/explore_use_cases.dart';
 
 class HotelDetailsScreen extends StatelessWidget {
-  final DataHotels hotelDetails;
+  dynamic hotelDetails;
   // final FacilitiesData facilitiesData ;
   HotelDetailsScreen({required this.hotelDetails,
    // this.facilitiesData
