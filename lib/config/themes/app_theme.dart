@@ -9,11 +9,7 @@ ThemeData appTheme() {
       fillColor:  MaterialStateProperty.all(Colors.black),
     ),
       primaryColor: AppColors.primaryColor,
-       scaffoldBackgroundColor: Colors.white,
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
-
-    ),
+       scaffoldBackgroundColor: AppColors.backgroundColorLight,
       sliderTheme: const SliderThemeData(
           valueIndicatorColor: Colors.transparent,
           valueIndicatorTextStyle: TextStyle(color: Colors.black)),

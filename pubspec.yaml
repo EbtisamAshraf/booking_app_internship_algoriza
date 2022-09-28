@@ -41,7 +41,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.1.1
   freezed_annotation: ^2.1.0
-  geolocator: ^9.0.1
+  geolocator:
   google_maps_flutter: ^2.2.0
   json_annotation: ^4.7.0
   json_serializable: ^6.4.0

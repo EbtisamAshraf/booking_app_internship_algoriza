@@ -12,7 +12,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_loading_widget.dart';
-
+import 'dart:math' as math;
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
@@ -95,61 +95,66 @@ class HomeScreen extends StatelessWidget {
                                             bottomLeft: Radius.circular(15),
                                           ),
                                           child:
-                                          // CachedNetworkImage(
-                                          //   imageUrl:
-                                          //   '${state.hotelsModel.data!.data![index].hotelImages!}',
-                                          //   width: 120,
-                                          //   height: 150,
-                                          //   placeholder: (context, url) =>
-                                          //   const Center(
-                                          //       child: CustomLoadingWidget()),
-                                          //   errorWidget: (context, url, error) =>
-                                          //       Image.asset(
-                                          //         'assets/images/hotel5.png',
-                                          //         width: 120,
-                                          //         height: 150,
-                                          //         fit: BoxFit.fitHeight,
-                                          //       ),
-                                          // ),
-
-                                              Image.asset(
-                                            'assets/images/hotel.jpg',
+                                          CachedNetworkImage(
+                                            imageUrl:
+                                            'http://api.mahmoudtaha.com/images/${state.hotelsModel.data!.data![index].hotelImages![math.Random().nextInt(state.hotelsModel.data!.data![index].hotelImages!.length)]}',
                                             width: 120,
                                             height: 150,
                                             fit: BoxFit.fitHeight,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                state.hotelsModel.data!
-                                                    .data![index].name!,
-                                                  style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                state.hotelsModel.data!
-                                                    .data![index].address!,
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: AppColors.hintColor,
+                                            placeholder: (context, url) =>
+                                            const Center(
+                                                child: CustomLoadingWidget()),
+                                            errorWidget: (context, url, error) =>
+                                                Image.asset(
+                                                  'assets/images/hotel5.png',
+                                                  width: 120,
+                                                  height: 150,
+                                                  fit: BoxFit.fitHeight,
                                                 ),
-                                              ),
-                                              const SizedBox(
-                                                height: 30,
-                                              ),
-                                              Expanded(
-                                                child: Column(
+                                          ),
+
+                                          //     Image.asset(
+                                          //   'assets/images/hotel.jpg',
+                                          //   width: 120,
+                                          //   height: 150,
+                                          //   fit: BoxFit.fitHeight,
+                                          // ),
+                                        ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  state.hotelsModel.data!
+                                                      .data![index].name!,
+                                                    style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall,
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  state.hotelsModel.data!
+                                                      .data![index].address!,
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: AppColors.hintColor,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 12,
+                                                ),
+                                                Column(
                                                   crossAxisAlignment:
                                                   CrossAxisAlignment
                                                       .start,
@@ -159,7 +164,7 @@ class HomeScreen extends StatelessWidget {
                                                     Row(
                                                       children: [
                                                         Text(
-                                                          '2.0 km to city',
+                                                          'Per night \\',
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                             color: AppColors
@@ -170,7 +175,7 @@ class HomeScreen extends StatelessWidget {
                                                           width: 10,
                                                         ),
                                                         Text(
-                                                          'EGP ${state.hotelsModel.data!.data![index].price}',
+                                                          '${state.hotelsModel.data!.data![index].price}\$',
                                                           style: Theme.of(context)
                                                               .textTheme
                                                               .headlineSmall,
@@ -212,8 +217,8 @@ class HomeScreen extends StatelessWidget {
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],

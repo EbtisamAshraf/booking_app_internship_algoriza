@@ -23,9 +23,13 @@ class HotelsCubit extends Cubit<HotelStates> {
   static HotelsCubit get(context) => BlocProvider.of(context);
 
   HotelsModel? hotelsModel;
-
+List<HotelsModel> hotels =[];
+  int lastPage = 1;
+  int total = 0;
+  int currentPage = 1;
   getHotels({required ExploreHotel exploreHotel}) async {
     emit(HotelsLoadingState());
+
     Either<Failure, HotelsModel> response =
         await exploreUseCase(exploreHotel: exploreHotel);
     emit(response.fold(
@@ -40,7 +44,7 @@ class HotelsCubit extends Cubit<HotelStates> {
   List<bool> checkboxValueList =  [false,false,false,false,];
   getCheckboxValueList(){
     checkboxValueList.clear();
-    List.generate(facilitiesModel.data!.length, (index) =>  checkboxValueList.add(false));
+    List.generate(facilitiesModel!.data!.length, (index) =>  checkboxValueList.add(false));
     debugPrint('checkboxValueList = $checkboxValueList');
 }
   int checkboxIndex = 0;
@@ -49,7 +53,7 @@ class HotelsCubit extends Cubit<HotelStates> {
     emit(InitialChangeCheckboxValueState());
     checkboxValueList[index] = value;
     if(value == true){
-      facilitiesInt =facilitiesModel.data![index].id! ;
+      facilitiesInt =facilitiesModel!.data![index].id! ;
      // facilitiesList.add(facilitiesModel.data![index].id!);
      //  debugPrint('facilitiesList = $facilitiesList');
     }else{
@@ -72,7 +76,7 @@ class HotelsCubit extends Cubit<HotelStates> {
           (data) => SearchHotelsLoadedState(searchModel:  data),
     ));
   }
- late FacilitiesModel  facilitiesModel ;
+  FacilitiesModel ? facilitiesModel ;
   getFacilities() async {
     emit(FacilitiesLoadingState());
     Either<Failure, FacilitiesModel> response =

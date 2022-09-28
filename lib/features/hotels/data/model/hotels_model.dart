@@ -82,7 +82,7 @@ class DataHotels {
   String? rate;
   String? createdAt;
   String? updatedAt;
-  List<HotelImages>? hotelImages;
+  List<String>? hotelImages;
   List<HotelFacilities>? hotelFacilities;
 
   DataHotels(
@@ -110,12 +110,7 @@ class DataHotels {
     rate = json['rate'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    if (json['hotel_images'] != null) {
-      hotelImages = <HotelImages>[];
-      json['hotel_images'].forEach((v) {
-        hotelImages!.add(HotelImages.fromJson(v));
-      });
-    }
+    hotelImages = List<String>.from(json['hotel_images'].map((x) => x['image']));
     if (json['hotel_facilities'] != null) {
       hotelFacilities = <HotelFacilities>[];
       json['hotel_facilities'].forEach((v) {
