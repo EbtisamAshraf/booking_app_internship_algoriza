@@ -1,7 +1,7 @@
-import 'package:booking_app_internship_algoriza/config/routes/app_routes.dart';
-import 'package:booking_app_internship_algoriza/core/utils/app_strings.dart';
 import 'package:booking_app_internship_algoriza/core/utils/media_query_values.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/explore_screen.dart';
  import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -17,6 +17,7 @@ class SliverHeader implements SliverPersistentHeaderDelegate {
     'assets/images/hotel2.png',
     'assets/images/hotel3.png',
   ];
+
 
   SliverHeader({required this.minExtension, required this.maxExtension});
   @override
@@ -66,7 +67,7 @@ class SliverHeader implements SliverPersistentHeaderDelegate {
                         color: AppColors.defaultColor,
                       ),
                       Text(
-                        'Where are you going?',
+                        'Where are you going?'.tr(),
                         style:
                             TextStyle(color: AppColors.hintColor, fontSize: 14),
                       )
@@ -83,35 +84,34 @@ class SliverHeader implements SliverPersistentHeaderDelegate {
             opacity: minExtension<= 250&&maxExtension>=1 ? 1.0 :0.0,
             duration: const Duration(milliseconds: 500),
             child: Padding(
-              padding: const EdgeInsets.only(top: 250.0, left: 12),
+              padding: const EdgeInsets.only(top: 250.0, left: 12,right: 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children:  [
                   Text(
-                    'Find Best Deal',
-                    style: TextStyle(
+                    'Find best deals'.tr(),
+                    style:const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
-                  SizedBox(
+                const  SizedBox(
                     height: 5,
                   ),
                   Text(
-                    'Extraordinary five-Star\noutdoor activities',
-                    style: TextStyle(color: Colors.white),
+                    "Extraordinary five-star\n outdoor activities".tr(),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ],
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 340, left: 12),
+            padding: const EdgeInsets.only(top: 340, left: 12,right: 12),
             child: Row(
               children: [
-                DefaultButton(text: 'View Hotel', onClick: () {
-                  AppStrings.isFilter == false;
-                   Navigator.of(context).pushNamed(Routes.exploreScreen);
+                DefaultButton(text: 'View Hotel'.tr(), onClick: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ExploreScreen()));
                 }),
                 const Spacer(),
                 // SmoothPageIndicator(
