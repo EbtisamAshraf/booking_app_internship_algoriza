@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:booking_app_internship_algoriza/core/error/failures.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/update_info_model.dart';
 import 'package:booking_app_internship_algoriza/features/profile/domain/repositories/profile_repository.dart';
@@ -16,7 +18,7 @@ class UpdateInfoUseCase {
 class UpdateInfoParam {
   String name;
   String email;
-  String image;
+  File image;
 
   UpdateInfoParam({required this.name, required this.email, required this.image});
 }

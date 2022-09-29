@@ -138,13 +138,21 @@ class FilterScreen extends StatelessWidget {
                   return customElevatedButton(
                       onPressed: () {
                         HotelsCubit.get(context).search(
+
                                 searchParam: SearchParam(
+                                  name: '',
                                 distance: currentSliderValue,
                                 minPrice:currentRangeValues.start.round() ,
                                 maxPrice: currentRangeValues.end.round(),
-                              facilities: HotelsCubit.get(context).facilitiesInt,
+                              facilities: HotelsCubit.get(context).facilitiesList.asMap().map(
+                                    (key, value) => MapEntry(
+                                  'facilities[$key]',
+                                  value,
+                                ),
+                              ),
                                 count: 10,
-                                page: 1));
+                                page: 1)
+                        );
                         AppStrings.isFilter == true;
                          Navigator.pushNamed(context, Routes.exploreScreen,);
                       },

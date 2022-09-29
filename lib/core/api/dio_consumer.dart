@@ -28,15 +28,15 @@ class DioConsumer implements ApiConsumer {
         return status! < StatusCode.internalServerError;
       });
 
-    dio.interceptors.add(di.sl<AppInterceptors>());
+    // dio.interceptors.add(di.sl<AppInterceptors>());
     if (kDebugMode) {
       dio.interceptors.add(di.sl<LogInterceptor>());
     }
   }
   @override
-  Future get(String path, {Map<String, dynamic>? queryParameters, Map<String, dynamic>? header}) async {
+  Future get(String path, {Map<String, dynamic>? queryParameters, Map<String, dynamic>? header,bool isMultipart = false,}) async {
     try {
-      final response = await dio.get(path, queryParameters: queryParameters,options:Options(contentType: 'application/json' ,headers: header));
+      final response = await dio.get(path, queryParameters: queryParameters,options:Options(contentType: isMultipart? 'multipart/form-data':'application/json' ,headers: header));
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);
@@ -46,10 +46,10 @@ class DioConsumer implements ApiConsumer {
   @override
   Future post(String path,
       {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters, Map<String, dynamic>? header}) async {
+      Map<String, dynamic>? queryParameters, Map<String, dynamic>? header,bool isMultipart = false,}) async {
     try {
       final response =
-          await dio.post(path, data: body, queryParameters: queryParameters,options:Options(contentType: 'application/json' ,headers: header));
+          await dio.post(path, data: body, queryParameters: queryParameters,options:Options(contentType: isMultipart ? 'multipart/form-data':'application/json' ,headers: header));
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);
@@ -59,10 +59,10 @@ class DioConsumer implements ApiConsumer {
   @override
   Future put(String path,
       {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters, Map<String, dynamic>? header}) async {
+      Map<String, dynamic>? queryParameters, Map<String, dynamic>? header,bool isMultipart = false,}) async {
     try {
       final response =
-          await dio.put(path, data: body, queryParameters: queryParameters,options:Options(contentType: 'application/json' ,headers: header));
+          await dio.put(path, data: body, queryParameters: queryParameters,options:Options(contentType: isMultipart? 'multipart/form-data' : 'application/json' ,headers: header));
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);

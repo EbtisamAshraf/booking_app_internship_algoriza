@@ -50,17 +50,20 @@ class HotelsCubit extends Cubit<HotelStates> {
     checkboxValueList[index] = value;
     if(value == true){
       facilitiesInt =facilitiesModel.data![index].id! ;
-     // facilitiesList.add(facilitiesModel.data![index].id!);
-     //  debugPrint('facilitiesList = $facilitiesList');
+     facilitiesList.add(facilitiesModel.data![index].id!);
+       debugPrint('facilitiesList = $facilitiesList');
     }else{
       facilitiesInt = null ;
-      // facilitiesList.remove(facilitiesModel.data![index].id!);
-      // debugPrint('facilitiesList = $facilitiesList');
+      facilitiesList.remove(facilitiesModel.data![index].id!);
+     debugPrint('facilitiesList = $facilitiesList');
     }
    emit(ChangeCheckboxValueState());
 
     return checkboxValueList;
   }
+
+
+  SearchModel? searchModel;
   search({required SearchParam searchParam}) async {
     emit(SearchHotelsLoadingState());
     Either<Failure, SearchModel> response =
@@ -69,7 +72,10 @@ class HotelsCubit extends Cubit<HotelStates> {
           (failure) => SearchHotelsErrorState(
         AppStrings.serverFailureMsg,
       ),
-          (data) => SearchHotelsLoadedState(searchModel:  data),
+          (data) {
+            searchModel = data;
+            return SearchHotelsLoadedState(searchModel:  data);
+          },
     ));
   }
  late FacilitiesModel  facilitiesModel ;

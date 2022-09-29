@@ -22,3 +22,22 @@ class ProfileInfoErrorState extends ProfileState {
   final String error;
   const ProfileInfoErrorState(this.error);
 }
+
+
+
+
+
+
+class UpdateProfileInfoLoadingState extends ProfileState {}
+class PickImageSuccessState extends ProfileState {}
+class UpdateProfileInfoLoadedState extends ProfileState {
+
+  final UpdateInfoModel updateInfoModel;
+
+  const UpdateProfileInfoLoadedState({required this.updateInfoModel});
+}
+
+class UpdateProfileInfoErrorState extends ProfileState {
+  final String error;
+  const UpdateProfileInfoErrorState(this.error);
+}
