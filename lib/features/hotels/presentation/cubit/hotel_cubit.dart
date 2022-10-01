@@ -27,12 +27,12 @@ class HotelsCubit extends Cubit<HotelStates> {
   getHotels({required ExploreHotel exploreHotel}) async {
     emit(HotelsLoadingState());
     Either<Failure, HotelsModel> response =
-        await exploreUseCase(exploreHotel: exploreHotel);
+    await exploreUseCase(exploreHotel: exploreHotel);
     emit(response.fold(
-      (failure) => GetHotelsErrorState(
+          (failure) => GetHotelsErrorState(
         AppStrings.serverFailureMsg,
       ),
-      (data) => HotelsLoadedState(hotelsModel: data),
+          (data) => HotelsLoadedState(hotelsModel: data),
     ));
   }
   List facilitiesList =[];
@@ -42,25 +42,37 @@ class HotelsCubit extends Cubit<HotelStates> {
     checkboxValueList.clear();
     List.generate(facilitiesModel.data!.length, (index) =>  checkboxValueList.add(false));
     debugPrint('checkboxValueList = $checkboxValueList');
-}
+  }
   int checkboxIndex = 0;
   changeCheckboxValue({required bool value, required int index}){
-
     emit(InitialChangeCheckboxValueState());
     checkboxValueList[index] = value;
     if(value == true){
       facilitiesInt =facilitiesModel.data![index].id! ;
-     // facilitiesList.add(facilitiesModel.data![index].id!);
-     //  debugPrint('facilitiesList = $facilitiesList');
+      facilitiesList.add(facilitiesModel.data![index].id!);
+      debugPrint('facilitiesList = $facilitiesList');
     }else{
       facilitiesInt = null ;
-      // facilitiesList.remove(facilitiesModel.data![index].id!);
-      // debugPrint('facilitiesList = $facilitiesList');
+      facilitiesList.remove(facilitiesModel.data![index].id!);
+      debugPrint('facilitiesList = $facilitiesList');
     }
-   emit(ChangeCheckboxValueState());
+    emit(ChangeCheckboxValueState());
 
     return checkboxValueList;
   }
+
+  List<int> selectedFacilities = [];
+
+  void selectFacility(int id) {
+    if (selectedFacilities.contains(id)) {
+      selectedFacilities.remove(id);
+    } else {
+      selectedFacilities.add(id);
+    }
+
+    emit(SelectFacilityState());
+  }
+  SearchModel? searchModel;
   search({required SearchParam searchParam}) async {
     emit(SearchHotelsLoadingState());
     Either<Failure, SearchModel> response =
@@ -69,10 +81,13 @@ class HotelsCubit extends Cubit<HotelStates> {
           (failure) => SearchHotelsErrorState(
         AppStrings.serverFailureMsg,
       ),
-          (data) => SearchHotelsLoadedState(searchModel:  data),
+          (data) {
+        searchModel = data;
+        return SearchHotelsLoadedState(searchModel:  data);
+      },
     ));
   }
- late FacilitiesModel  facilitiesModel ;
+  late FacilitiesModel  facilitiesModel ;
   getFacilities() async {
     emit(FacilitiesLoadingState());
     Either<Failure, FacilitiesModel> response =
@@ -82,12 +97,19 @@ class HotelsCubit extends Cubit<HotelStates> {
         AppStrings.serverFailureMsg,
       ),
           (data) {
-            facilitiesModel = data;
-            getCheckboxValueList();
-            return FacilitiesLoadedState(facilitiesModel:  data);
-          },
+        facilitiesModel = data;
+        getCheckboxValueList();
+        return FacilitiesLoadedState(facilitiesModel:  data);
+      },
     ));
   }
+
+  bool isFilter = false;
+  changeFilterState(){
+    isFilter = !isFilter;
+    emit(ChangeFilterState());
+  }
+  TextEditingController searchController = TextEditingController();
 
   String msg(Failure failure) {
     switch (failure.runtimeType) {
