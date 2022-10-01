@@ -54,14 +54,17 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<UpdateInfoModel> updateInfo({required UpdateInfoParam updateInfoParam})  async{
-    final response = await apiConsumer.post(EndPoints.updateInfo,isMultipart: true,body: {
-      'name': updateInfoParam.name,
-      'email': updateInfoParam.email,
-      'image':  await MultipartFile.fromFile(
-        updateInfoParam.image.path,
-        filename: Uri.file(updateInfoParam.image.path).pathSegments.last,
-      ),
-    },header: {'token': AppStrings.token,},).onError((error, stackTrace) {
+    final response = await apiConsumer.post(EndPoints.updateInfo,isMultipart: true,
+      body: FormData.fromMap({
+        'name': updateInfoParam.name,
+        'email': updateInfoParam.email,
+        'image': await MultipartFile.fromFile(
+          updateInfoParam.image.path,
+          filename: Uri.file(updateInfoParam.image.path).pathSegments.last,
+        ),
+      }),
+
+      header: {'token': AppStrings.token,},).onError((error, stackTrace) {
       debugPrint('error = $error');
       throw ServerException;
     });

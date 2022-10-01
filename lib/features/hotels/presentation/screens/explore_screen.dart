@@ -79,11 +79,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         textController: searchController,
                       ),
                       onPressedSearch: () {
-                        debugPrint(searchController.text);
-                        AppStrings.isFilter == true;
-                        HotelsCubit.get(context).search(
-                            searchParam:
-                                SearchParam(name: searchController.text));
+                        Navigator.pushNamed(context, Routes.searchScreen);
+                        // debugPrint(searchController.text);
+                        // AppStrings.isFilter == true;
+                        // HotelsCubit.get(context).search(
+                        //     searchParam:
+                        //         SearchParam(name: searchController.text));
                       },
                     );
                   },

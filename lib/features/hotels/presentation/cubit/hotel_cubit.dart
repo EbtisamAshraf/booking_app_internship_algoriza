@@ -45,7 +45,6 @@ class HotelsCubit extends Cubit<HotelStates> {
 }
   int checkboxIndex = 0;
   changeCheckboxValue({required bool value, required int index}){
-
     emit(InitialChangeCheckboxValueState());
     checkboxValueList[index] = value;
     if(value == true){
@@ -62,7 +61,17 @@ class HotelsCubit extends Cubit<HotelStates> {
     return checkboxValueList;
   }
 
+  List<int> selectedFacilities = [];
 
+  void selectFacility(int id) {
+    if (selectedFacilities.contains(id)) {
+      selectedFacilities.remove(id);
+    } else {
+      selectedFacilities.add(id);
+    }
+
+    emit(SelectFacilityState());
+  }
   SearchModel? searchModel;
   search({required SearchParam searchParam}) async {
     emit(SearchHotelsLoadingState());
@@ -94,6 +103,13 @@ class HotelsCubit extends Cubit<HotelStates> {
           },
     ));
   }
+
+  bool isFilter = false;
+  changeFilterState(){
+    isFilter = !isFilter;
+    emit(ChangeFilterState());
+  }
+  TextEditingController searchController = TextEditingController();
 
   String msg(Failure failure) {
     switch (failure.runtimeType) {

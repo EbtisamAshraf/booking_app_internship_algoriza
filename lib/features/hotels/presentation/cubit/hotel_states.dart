@@ -8,6 +8,7 @@ abstract class HotelStates {}
 class InitialState extends HotelStates {}
 
 class HotelsLoadingState extends HotelStates {}
+class SelectFacilityState extends HotelStates {}
 
 class HotelsLoadedState extends HotelStates {
   final HotelsModel hotelsModel;
@@ -40,14 +41,13 @@ class SearchHotelsErrorState extends HotelStates {
 }
 
 class FacilitiesLoadingState extends HotelStates {}
-
+class ChangeFilterState extends HotelStates {}
 
 class FacilitiesLoadedState extends HotelStates {
   final FacilitiesModel facilitiesModel;
 
   FacilitiesLoadedState({required this.facilitiesModel});
 }
-
 class FacilitiesErrorState extends HotelStates {
   final String error;
   FacilitiesErrorState(this.error);
