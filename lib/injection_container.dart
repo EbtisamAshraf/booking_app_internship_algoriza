@@ -56,12 +56,12 @@ Future<void> init() async {
 
   ///feature --------------- profile ---------------
   //bloc
-  sl.registerFactory(() => ProfileCubit( getProfileInfoUseCase: sl() , updateInfoUseCase: sl()));
+  // sl.registerFactory(() => ProfileCubit( getProfileInfoUseCase: sl() ,));
 
 
   // use case
-  sl.registerLazySingleton(() => GetProfileInfoUseCase(sl()));
-  sl.registerLazySingleton(() => UpdateInfoUseCase(sl()));
+
+
   //  //Repository
 
   sl.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl(
@@ -116,10 +116,12 @@ Future<void> init() async {
 
   /// ---------------------------------------------------------------------------
   // core
-    sl.registerFactory(() => AppCubit( ));
+    sl.registerFactory(() => AppCubit(sl(), sl()));
      sl.registerLazySingleton<NetworkInfo>(
          () => NetworkInfoImpl(connectionChecker: sl()));
-
+     // use case
+  sl.registerLazySingleton(() => UpdateInfoUseCase(sl()));
+  sl.registerLazySingleton(() => GetProfileInfoUseCase(sl()));
     sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: sl()));
   // external
 

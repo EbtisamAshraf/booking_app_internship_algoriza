@@ -19,7 +19,7 @@ class SearchParam{
   String? address;
   num? maxPrice;
   num? minPrice;
-  int? facilities;
+  Map<String, int>?  facilities;
   double? latitude;
   double? longitude;
   num? distance;

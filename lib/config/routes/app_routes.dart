@@ -6,6 +6,7 @@ import 'package:booking_app_internship_algoriza/features/hotels/presentation/scr
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/filtter_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/home_screen.dart';
 import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/main_screen.dart';
+import 'package:booking_app_internship_algoriza/features/hotels/presentation/screens/search_screen.dart';
 import 'package:booking_app_internship_algoriza/features/map/screen/map_screen.dart';
 import 'package:booking_app_internship_algoriza/features/profile/data/models/profile_info_model.dart';
 import 'package:booking_app_internship_algoriza/features/profile/presentation/screens/edit_profile_screen.dart';
@@ -19,13 +20,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booking_app_internship_algoriza/injection_container.dart' as di;
 
-
-
 class Routes {
   static const String init = '/';
   static const String loginScreenRoute = "/login";
   static const String registerScreenRoute = "/register";
-
   static const String profileScreenRoute = "/profile";
   static const String editProfileScreenRoute = "/editProfile";
   static const String settingScreenRoute = "/setting";
@@ -36,6 +34,7 @@ class Routes {
   static const String languageScreen = "/languageScreen";
   static const String mapScreen = "/mapScreen";
   static const String filterScreen = "/filterScreen";
+  static const String searchScreen = "/searchScreen";
 }
 
 class RouteGenerator {
@@ -56,20 +55,24 @@ class RouteGenerator {
       case Routes.editProfileScreenRoute:
         ProfileInfoModel profileInfo = settings.arguments as ProfileInfoModel;
         return MaterialPageRoute(
-            builder: (_) =>
-                EditProfileScreen(
+            builder: (_) => EditProfileScreen(
                   profileInfo: profileInfo,
                 ));
 
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case Routes.searchScreen:
+        return MaterialPageRoute(builder: (_) => BlocProvider(
+  create: (context) => di.sl<HotelsCubit>(),
+  child: SearchScreen(),
+));
 
       case Routes.exploreScreen:
-        return MaterialPageRoute(builder: (_) =>
-            BlocProvider(
-              create: (context) => di.sl<HotelsCubit>(),
-              child: ExploreScreen(),
-            ));
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => di.sl<HotelsCubit>(),
+                  child: ExploreScreen(),
+                ));
 
       case Routes.settingScreenRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
@@ -90,8 +93,7 @@ class RouteGenerator {
 
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
-        builder: (_) =>
-            Scaffold(
+        builder: (_) => Scaffold(
               appBar: AppBar(
                 title: const Text(AppStrings.noRouteFound),
               ),

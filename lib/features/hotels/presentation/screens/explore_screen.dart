@@ -79,10 +79,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         textController: searchController,
                       ),
                       onPressedSearch: () {
-                        debugPrint(searchController.text);
-                        HotelsCubit.get(context).search(
-                            searchParam:
-                                SearchParam(name: searchController.text));
+                        Navigator.pushNamed(context, Routes.searchScreen);
+                        // debugPrint(searchController.text);
+                        // AppStrings.isFilter == true;
+                        // HotelsCubit.get(context).search(
+                        //     searchParam:
+                        //         SearchParam(name: searchController.text));
                       },
                     );
                   },
@@ -96,7 +98,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   if (state is HotelsLoadingState || state is SearchHotelsLoadingState ) {
                     return const CustomLoadingWidget();
                   }
-                 else if (state is HotelsLoadedState  ) {
+                 else if (state is HotelsLoadedState  &&  AppStrings.isFilter == false ) {
                     dataHotelsModel = state.hotelsModel;
                     return ListView.builder(
                         shrinkWrap: true,
@@ -116,7 +118,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             ),
                           );
                         });
-                  } else if (state is SearchHotelsLoadedState) {
+                  }
+                 else if (state is SearchHotelsLoadedState  &&  AppStrings.isFilter == true) {
                     SearchModel searchModel= state.searchModel;
                     return ListView.builder(
                         shrinkWrap: true,

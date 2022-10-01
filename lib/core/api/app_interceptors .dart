@@ -6,7 +6,7 @@ class AppInterceptors extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     debugPrint('REQUEST[${options.method}] => PATH: ${options.path}');
-    options.headers[AppStrings.contentType] = AppStrings.applicationJson;
+    // options.headers[AppStrings.contentType] = AppStrings.applicationJson;
     return super.onRequest(options, handler);
   }
 

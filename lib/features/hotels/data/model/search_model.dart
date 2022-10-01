@@ -38,22 +38,22 @@ class Data {
   });
 
   int? currentPage;
-  List<Datum>? data;
-  String? firstPageUrl;
+  List<DataSearch>? data;
+  dynamic firstPageUrl;
   int? from;
   int? lastPage;
-  String? lastPageUrl;
+  dynamic lastPageUrl;
   List<Link>? links;
   dynamic nextPageUrl;
-  String? path;
-  String? perPage;
+  dynamic path;
+  dynamic perPage;
   dynamic prevPageUrl;
   int? to;
   int? total;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     currentPage: json["current_page"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: List<DataSearch>.from(json["data"].map((x) => DataSearch.fromJson(x))),
     firstPageUrl: json["first_page_url"],
     from: json["from"],
     lastPage: json["last_page"],
@@ -84,8 +84,8 @@ class Data {
   };
 }
 
-class Datum {
-  Datum({
+class DataSearch {
+  DataSearch({
      this.id,
      this.name,
      this.description,
@@ -113,7 +113,7 @@ class Datum {
   List<Facility>? hotelImages;
   List<Facility>? facilities;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory DataSearch.fromJson(Map<String, dynamic> json) => DataSearch(
     id: json["id"],
     name: json["name"],
     description: json["description"],
@@ -159,7 +159,7 @@ class Facility {
   String? image;
   DateTime? createdAt;
   DateTime? updatedAt;
-  String? hotelId;
+  var hotelId;
 
   factory Facility.fromJson(Map<String, dynamic> json) => Facility(
     id: json["id"],
@@ -187,8 +187,8 @@ class Link {
      this.active,
   });
 
-  String? url;
-  String? label;
+  var url;
+  var label;
   bool? active;
 
   factory Link.fromJson(Map<String, dynamic> json) => Link(
@@ -209,7 +209,7 @@ class Status {
      this.type,
   });
 
-  String? type;
+  var type;
 
   factory Status.fromJson(Map<String, dynamic> json) => Status(
     type: json["type"],
