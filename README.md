@@ -33,8 +33,8 @@ Booking Application for booking hotels
 - Filtering the Hotels.
 - Show the hotels on the Map.
 
-## Screens :
+## video demo :
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+https://drive.google.com/file/d/1NWZHcgrwdRDCKGgpb4rHVb1osSZTSJon/view?usp=sharing
 
  
