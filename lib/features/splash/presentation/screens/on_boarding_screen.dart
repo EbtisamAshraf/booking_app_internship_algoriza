@@ -27,7 +27,7 @@ class OnBoardingScreen extends StatelessWidget {
           image: ImageAssets.onBoardingImage1,
           title: Text('Plan your trips'.tr(),
               style: Theme.of(context).textTheme.displayMedium),
-          body: ' book one of your unique hotel to\nescape the ordinary'.tr()),
+          body: 'book one of your unique hotel to\nescape the ordinary'.tr()),
       OnBoardingModel(
           image: ImageAssets.onBoardingImage2,
           title: Text('Find best deals'.tr(),
@@ -93,7 +93,7 @@ class OnBoardingScreen extends StatelessWidget {
                     height: 30,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: customElevatedButton(
                       onPressed: () {
                         OnBoardingCubit.get(context).changeIsSkip();
@@ -104,7 +104,7 @@ class OnBoardingScreen extends StatelessWidget {
                                     ? LoginScreen()
                                     : MainScreen()));
                       },
-                      text: 'LOGIN'.tr(),
+                      text: 'Login'.tr(),
                       context: context,
                     ),
                   ),

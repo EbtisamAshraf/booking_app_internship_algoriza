@@ -78,7 +78,7 @@ class FilterScreen extends StatelessWidget {
                     return const CustomLoadingWidget();
                   } else if (state is FacilitiesLoadedState || state is InitialChangeCheckboxValueState|| state is ChangeCheckboxValueState) {
                     // FacilitiesModel facilities = state.facilitiesModel;
-                    FacilitiesModel facilities = HotelsCubit.get(context).facilitiesModel;
+                    FacilitiesModel? facilities = HotelsCubit.get(context).facilitiesModel;
 
                     return Expanded(
                       child: GridView.count(
@@ -87,7 +87,7 @@ class FilterScreen extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         childAspectRatio: 2 / 0.4,
                         children:[ ...List.generate(
-                            facilities.data!.length,
+                            facilities!.data!.length,
                             (index) => SizedBox(
                                   child: Row(
                                     children: [
